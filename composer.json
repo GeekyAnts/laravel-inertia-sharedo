@@ -1,0 +1,54 @@
+{
+    "name": "geekyants/share-dialog",
+    "description": "Adds Share Functionality in Laravel Projects",
+    "keywords": [
+        "geekyants",
+        "share-dialog"
+    ],
+    "homepage": "https://github.com/geekyants/share-dialog",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Cyrus Passi",
+            "email": "cyruspassi@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0",
+        "silber/bouncer": "v1.0.0-rc.10"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Geekyants\\ShareDialog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Geekyants\\ShareDialog\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Geekyants\\ShareDialog\\ShareDialogServiceProvider"
+            ],
+            "aliases": {
+                "ShareDialog": "Geekyants\\ShareDialog\\ShareDialogFacade"
+            }
+        }
+    }
+}
