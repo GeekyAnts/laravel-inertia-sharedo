@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Bouncer;
-use App\Services\RemovePreviousAbilties;
+use Geekyants\ShareDialog\Services\RemovePreviousAbilties;
 use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
 use Debugbar;
@@ -40,8 +40,10 @@ class ShareDialogController extends Controller
             foreach ($users as $user) {
                 foreach ($user->abilities as $ability) {
                     if ($ability->entity_type == $model_name && $user->id != $authUser->id) {
-
-                        $user->ability = $ability->name;
+                        if ($ability->name == "read")
+                            $user->ability = "Read";
+                        else if ($ability->name = "write")
+                            $user->ability = "Can Edit";
                         array_push($validUsers, $user);
                     }
                 }
@@ -54,9 +56,8 @@ class ShareDialogController extends Controller
             $entityModelSmall = substr($entity, 0, -1);
             $model['entity_name'] = $entityModelSmall;
 
-            return Inertia::render('Home/index', ['entity' => $model, 'users' => $validUsers]);
+            return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $validUsers]);
         } else {
-
             return back()->withErrors("Model does not exist");
         }
     }
@@ -69,17 +70,18 @@ class ShareDialogController extends Controller
             'email' => $email,
             'password' => Hash::make('user'),
         ]);
+
         return $user;
     }
 
     public function assignAbility(Request $request)
     {
-
-
         $validatedData = $request->validate([
+            'emails' => 'required',
             'emails.*.email' => 'bail|required|email|min:5',
             'ability' => 'required'
         ]);
+
         $entityClass = ucfirst($request->entity_name);
         $model_name = 'App\Models\\' . $entityClass;
         $model = $model_name::findOrFail($request->entity_id);
@@ -94,7 +96,9 @@ class ShareDialogController extends Controller
             $user = User::where('email', $email['email'])->first();
             if (!$user) {
                 $user = $this->createUser($email['email']);
-                $message = "User Invited!";
+                if (!$user)
+                    return back()->withErrors("User could not be created successfully!");
+                $message = "Users Invited!";
             }
             if ($request->ability == "Read") {
                 RemovePreviousAbilties::removeAbilties($user, $model, $model_name);
