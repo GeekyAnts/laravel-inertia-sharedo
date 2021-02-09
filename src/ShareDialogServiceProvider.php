@@ -31,7 +31,10 @@ class ShareDialogServiceProvider extends ServiceProvider
 
             // Publishing assets.
             $this->publishes([
-                __DIR__ . '/./resources/js' => resource_path('/assets/vendor/share-dialog'),
+                __DIR__ . '/./resources/js' => resource_path('/js/Pages/ShareDialog'),
+            ], 'assets');
+            $this->publishes([
+                __DIR__ . '/./resources/css' => resource_path('/css/ShareDialog'),
             ], 'assets');
 
             // Publishing the translation files.
