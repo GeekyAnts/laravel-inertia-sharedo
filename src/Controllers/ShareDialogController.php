@@ -11,7 +11,6 @@ use Bouncer;
 use Geekyants\ShareDialog\Services\RemovePreviousAbilties;
 use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
-use Debugbar;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
@@ -34,12 +33,14 @@ class ShareDialogController extends Controller
 
             if ($authUser->id == $model->user_id) {
                 Bouncer::allow($authUser)->toOwn($model_name);
+                Bouncer::allow($authUser)->to('write', $model_name);
+                Bouncer::allow($authUser)->to('read', $model_name);
             }
 
             $validUsers = [];
             foreach ($users as $user) {
                 foreach ($user->abilities as $ability) {
-                    if ($ability->entity_type == $model_name && $user->id != $authUser->id) {
+                    if ($ability->entity_type == $model_name && $ability->entity_id == $model->id && $user->id != $authUser->id) {
                         if ($ability->name == "read")
                             $user->ability = "Read";
                         else if ($ability->name = "write")
