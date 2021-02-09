@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Bouncer;
-use App\Services\RemovePreviousAbilties;
+use Geekyants\ShareDialog\Services\RemovePreviousAbilties;
 use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
 use Debugbar;
