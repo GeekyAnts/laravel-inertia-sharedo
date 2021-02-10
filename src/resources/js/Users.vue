@@ -55,12 +55,15 @@ export default {
       options: [
         {
           ability: "Read",
+          value: "read",
         },
         {
           ability: "Can Edit",
+          value: "write",
         },
         {
           ability: "Remove",
+          value: "remove",
         },
       ],
       tags: [],
@@ -73,11 +76,12 @@ export default {
         email: index,
       });
       const data = {
-        ability: selectedOption.ability,
+        ability: selectedOption.value,
         emails: emails,
         entity_id: this.entity.id,
         entity_name: this.entity.entity_name,
       };
+      console.log(data);
       this.$inertia.post("/share-dialog", data, {
         onSuccess: () => {
           this.$emit("alertClose");
@@ -88,4 +92,3 @@ export default {
 };
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-

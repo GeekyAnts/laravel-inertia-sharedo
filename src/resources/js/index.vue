@@ -187,7 +187,7 @@
   </div>
 </template>
 
- <script>
+<script>
 import Layout from "./Layout";
 import Multiselect from "vue-multiselect";
 import Users from "./Users";
@@ -213,13 +213,16 @@ export default {
       },
       value: {
         ability: "Read",
+        value: "read",
       },
       options: [
         {
           ability: "Read",
+          value: "read",
         },
         {
           ability: "Can Edit",
+          value: "write",
         },
       ],
       alertOpen: false,
@@ -266,9 +269,10 @@ export default {
       if (!this.finds.length) this.showInvite = false;
     },
     handleSubmit(e) {
+      console.log(this.value);
       const formData = {
         emails: this.finds,
-        ability: this.value.ability,
+        ability: this.value.value,
         entity_id: this.entity.id,
         entity_name: this.entity.entity_name,
       };
@@ -303,9 +307,9 @@ export default {
     },
   },
 };
-</script> 
- <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
- <style>
+</script>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style>
 #input-email:focus {
   outline: none !important;
   box-shadow: none !important;

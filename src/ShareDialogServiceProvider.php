@@ -24,6 +24,7 @@ class ShareDialogServiceProvider extends ServiceProvider
                 __DIR__ . '/./config/config.php' => config_path('share-dialog.php'),
             ], 'config');
 
+
             // Publishing the views.
             // $this->publishes([
             //     __DIR__ . '/./resources/views' => resource_path('views/vendor/share-dialog'),
