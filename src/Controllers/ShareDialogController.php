@@ -31,15 +31,16 @@ class ShareDialogController extends Controller
         try {
             $entityCapitalize = ucfirst($entity);
             $entityModel = substr($entityCapitalize, 0, -1);
-            $model_name = 'App\Models\\' . $entityModel;
             $entityModelSmall = substr($entity, 0, -1);
-            if (class_exists("App\Models\\" . $entityModel)) {
+            $modelClass = config('share-dialog.modelPath') . $entityModel;
 
+            if (class_exists($modelClass)) {
 
                 $authUser = Auth::user();
 
                 //find model
-                $model = $model_name::with('user')->findOrFail($entityId);
+                $model = $modelClass::with('user')->findOrFail($entityId);
+
                 $model['entity_name'] = $entityModelSmall;
 
 
@@ -118,8 +119,8 @@ class ShareDialogController extends Controller
             ]);
 
             $entityClass = ucfirst($request->entity_name);
-            $model_name = 'App\Models\\' . $entityClass;
-            $model = $model_name::findOrFail($request->entity_id);
+            $modelClass = config('share-dialog.modelPath') . $entityClass;
+            $model = $modelClass::findOrFail($request->entity_id);
             $entityModelSmall = $request->entity_name . 's';
 
 
@@ -137,12 +138,12 @@ class ShareDialogController extends Controller
 
                 $validAbilities = ['read', 'write'];
                 if (in_array($request->ability, $validAbilities)) {
-                    RemovePreviousAbilties::removeAbilties($user, $model, $model_name);
+                    RemovePreviousAbilties::removeAbilties($user, $model, $modelClass);
                     Bouncer::allow($user)->to($request->ability, $model);
                 }
                 if ($request->ability == "remove") {
                     $message = "User Removed!";
-                    RemovePreviousAbilties::removeAbilties($user, $model, $model_name);
+                    RemovePreviousAbilties::removeAbilties($user, $model, $modelClass);
                 }
             }
             return redirect()->route('share-dialog', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('message', $message);
