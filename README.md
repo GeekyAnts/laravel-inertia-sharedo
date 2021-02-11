@@ -1,9 +1,11 @@
-# Very short description of the package
+# Description
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/geekyants/share-dialog.svg?style=flat-square)](https://packagist.org/packages/geekyants/share-dialog)
 [![Build Status](https://img.shields.io/travis/geekyants/share-dialog/master.svg?style=flat-square)](https://travis-ci.org/geekyants/share-dialog)
 [![Quality Score](https://img.shields.io/scrutinizer/g/geekyants/share-dialog.svg?style=flat-square)](https://scrutinizer-ci.com/g/geekyants/share-dialog)
 [![Total Downloads](https://img.shields.io/packagist/dt/geekyants/share-dialog.svg?style=flat-square)](https://packagist.org/packages/geekyants/share-dialog)
+
+![Mult-User-Todo](./public/images/share-dialog.png)
 
 Adds Share Functionality in your Laravel Projects.
 
@@ -17,7 +19,7 @@ It helps in managing roles and permissions for any app using Eloquent models. Yo
 
 Make sure you have [Inertia]("https://inertiajs.com/") installed with Vuejs configuration.
 
-If you have Bouncer and Vue-Multiselect already installed you can move to the Installation section.
+If you have [Bouncer]("https://github.com/JosephSilber/bouncer") and [Vue-Multiselect]("https://vue-multiselect.js.org/") already installed you can move to the Installation section.
 
 ### Bouncer
 
