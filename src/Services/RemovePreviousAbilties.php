@@ -5,6 +5,7 @@
 namespace Geekyants\ShareDialog\Services;
 
 use Bouncer;
+use Exception;
 
 class RemovePreviousAbilties
 {
@@ -14,6 +15,7 @@ class RemovePreviousAbilties
 
     public static function removeAbilties($user, $model, $model_name)
     {
+
 
         $abilities = $user->getAbilities();
         foreach ($abilities as $ability) {

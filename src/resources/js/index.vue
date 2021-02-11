@@ -1,7 +1,7 @@
 <template>
-  <div class="main h-screen w-screen">
+  <div class="main h-screen p-4 w-screen">
     <div
-      v-if="$page.props.flash.message && show"
+      v-if="$page.props.flash.success && show"
       class="flex items-center justify-between bg-green-500 rounded max-w-3xl"
     >
       <div class="flex items-center">
@@ -13,7 +13,7 @@
           <polygon points="0 11 2 9 7 14 18 3 20 5 7 18" />
         </svg>
         <div class="py-3 text-white text-sm font-medium">
-          {{ $page.props.flash.message }}
+          {{ $page.props.flash.success }}
         </div>
       </div>
       <button type="button" class="group mr-2 p-2" @click="show = false">
@@ -39,7 +39,6 @@
           {{ error }}
         </li>
       </ul>
-
       <button type="button" class="group mr-2 p-2" @click="show = false">
         <svg
           class="block w-2 h-2 fill-green-800 group-hover:fill-white"
@@ -54,23 +53,22 @@
         </svg>
       </button>
     </div>
-
     <div>
       <form
         @submit.prevent="handleSubmit"
+        @keypress.enter.prevent
         class="flex flex-col space-y-5 p-3 border-b border-gray-300 md:flex-row md:space-x-5 md:space-y-0"
       >
-        <span class="text-lg font-black pt-1">To:</span>
+        <span class="text-lg font-bold">To:</span>
         <span class="flex flex-col space-y-2">
           <div
-            v-for="find in finds"
-            v-bind:key="find.email"
+            v-for="(find, index) in finds"
+            v-bind:key="index"
             class="flex bg-gray-300 justify-between p-1 w-full md:w-48"
           >
             <span class="inline overflow-ellipsis overflow-hidden ... w-3/4">
               {{ find.email }}
             </span>
-
             <button
               type="button"
               v-on:click="deleteUser(find)"
@@ -90,7 +88,6 @@
               </svg>
             </button>
           </div>
-
           <input
             type="text"
             id="input-email"
@@ -98,19 +95,21 @@
             name="email[]"
             @input="onInputChange"
             @change="onChange"
+            @keyup.delete="handleDelete()"
             v-model="email"
+            @keyup.enter="createUser"
             class="border-none focus:outline-none"
           />
           <div class="w-full">
             <div
               v-if="validEmail"
-              class="absolute h-10 bg-blue-400 px-3 py-2 text-white hover:bg-blue-700"
+              class="absolute z-40 bg-blue-400 p-3 text-white hover:bg-blue-700"
             >
               <button v-on:click="createUser()">Create {{ this.email }}</button>
             </div>
             <div
               v-else-if="showEnterValidEmail"
-              class="absolute h-10 w-56 bg-white border-2 border-gray-300 p-2 color-gray-300 flex items-center justify-center"
+              class="absolute z-40 p-3 w-56 bg-white border-2 border-gray-300 p-2 color-gray-300 flex items-center justify-center"
             >
               Enter valid email
             </div>
@@ -132,7 +131,7 @@
         <span v-if="showInvite">
           <button
             type="submit"
-            class="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-16 rounded"
+            class="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-2 px-16 rounded"
           >
             Invite
           </button>
@@ -159,7 +158,6 @@
         </span>
         <span class="text-bg-gray-500"> Invite through Link </span>
       </span>
-
       <span class="flex items-center">
         <multiselect
           v-model="inviteLink"
@@ -176,17 +174,15 @@
       </span>
       <span>
         <button
-          class="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          class="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded"
         >
           Copy Invite Link
         </button>
       </span>
     </div>
-
     <users :users="users" :entity="entity" v-on:alertClose="alertClose"></users>
   </div>
 </template>
-
 <script>
 import Layout from "./Layout";
 import Multiselect from "vue-multiselect";
@@ -232,11 +228,19 @@ export default {
     entity: {},
     users: Array,
   },
+  mounted() {
+    this.show = false;
+  },
   methods: {
     alertClose: function () {
       setTimeout(() => {
         this.show = false;
-      }, 2000);
+      }, 4000);
+    },
+    handleDelete() {
+      if (this.email == "") {
+        this.finds.pop();
+      }
     },
     addFind: function () {
       this.finds.push({
@@ -253,6 +257,7 @@ export default {
       this.alertOpen = false;
     },
     createUser: function () {
+      if (!this.validEmail) return;
       const data = {
         email: this.email,
       };
@@ -260,6 +265,7 @@ export default {
       this.finds.push({
         email: this.email,
       });
+      this.showEnterValidEmail = false;
       this.showInvite = true;
       this.email = "";
     },
@@ -269,7 +275,6 @@ export default {
       if (!this.finds.length) this.showInvite = false;
     },
     handleSubmit(e) {
-      console.log(this.value);
       const formData = {
         emails: this.finds,
         ability: this.value.value,
@@ -314,35 +319,29 @@ export default {
   outline: none !important;
   box-shadow: none !important;
 }
-
 .multiselect__option--highlight {
   background: #d3eeff !important;
   color: black !important;
 }
-
 .multiselect__option {
   font-size: 12px;
   color: black;
   line-height: 8px;
   min-height: 0px !important;
 }
-
 .multiselect__option:hover {
   color: black !important;
 }
-
 .multiselect {
   min-height: 0px !important;
   position: none;
 }
-
 .multiselect__tag {
   position: static;
   font-size: 4rem !important;
   border: none;
   background: #fff;
 }
-
 .multiselect__single {
   min-height: 0px !important;
   line-height: unset !important;
