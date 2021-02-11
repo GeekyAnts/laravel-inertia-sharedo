@@ -4,7 +4,7 @@
  * You can place your custom package configuration in here.
  */
 return [
-    "modelPath" => "",
-    "inertiaPath" => "",
+    "modelPath" => "App\Models\\",
+    "inertiaPath" => "Pages",
     'middleware' => ['web', 'auth'],
 ];
