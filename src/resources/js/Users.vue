@@ -2,7 +2,7 @@
   <div>
     <div
       v-for="(user, index) in users"
-      :key="user.id"
+      :key="index"
       class="p-4 flex border-b border-gray-300 space-x-3"
     >
       <span class="flex items-center space-x-2">
@@ -24,9 +24,9 @@
       </span>
       <span>
         <multiselect
-          v-model="users[index]"
-          :id="user.email"
-          track-by="ability"
+          v-model="usersAbilties[index]"
+          :id="index"
+          track-by="value"
           label="ability"
           @select="onSelect"
           placeholder="Select one"
@@ -49,6 +49,7 @@ export default {
   props: {
     entity: {},
     users: Array,
+    usersAbilties: Array,
   },
   data() {
     return {
@@ -66,14 +67,13 @@ export default {
           value: "remove",
         },
       ],
-      tags: [],
     };
   },
   methods: {
     onSelect: function (selectedOption, index) {
       const emails = [];
       emails.push({
-        email: index,
+        email: this.users[index].email,
       });
       const data = {
         ability: selectedOption.value,
@@ -81,12 +81,8 @@ export default {
         entity_id: this.entity.id,
         entity_name: this.entity.entity_name,
       };
-      console.log(data);
-      this.$inertia.post("/share-dialog", data, {
-        onSuccess: () => {
-          this.$emit("alertClose");
-        },
-      });
+      this.users[index].ability = selectedOption.value;
+      this.$emit("updateAccess", data);
     },
   },
 };

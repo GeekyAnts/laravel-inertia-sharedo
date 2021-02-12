@@ -50,7 +50,7 @@ class ShareDialogController extends Controller
                 }
 
                 //else assign ability to auth user
-                if ($authUser->id == $model->user_id) {
+                if ($authUser->id == $model->user_id && Bouncer::cannot('write', $model)) {
                     Bouncer::allow($authUser)->toOwn($model);
                     Bouncer::allow($authUser)->to('write', $model);
                     Bouncer::allow($authUser)->to('read', $model);
