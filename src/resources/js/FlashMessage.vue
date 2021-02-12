@@ -66,7 +66,7 @@ export default {
   mounted() {
     this.$page.props.flash.success = null;
     this.$page.props.flash.error = null;
-    $this.show = false;
+    this.show = false;
   },
   watch: {
     "$page.flash": {
