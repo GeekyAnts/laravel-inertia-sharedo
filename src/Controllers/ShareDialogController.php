@@ -32,7 +32,7 @@ class ShareDialogController extends Controller
             $entityModel = substr($entityCapitalize, 0, -1);
             $entityModelSmall = substr($entity, 0, -1);
             $modelClass = config('share-dialog.modelPath') . $entityModel;
-
+            $button = config('share-dialog.button');
             if (class_exists($modelClass)) {
 
 
@@ -45,12 +45,12 @@ class ShareDialogController extends Controller
 
 
                 //if auth user does not own model
-                if ($model->user_id != $authUser->id) {
+                if ($model->user_id != $authUser->id && Bouncer::cannot('write', $model)) {
                     return back()->withErrors("You are not authorized!");
                 }
 
                 //else assign ability to auth user
-                if ($authUser->id == $model->user_id && Bouncer::cannot('write', $model)) {
+                if ($authUser->id == $model->user_id) {
                     Bouncer::allow($authUser)->toOwn($model);
                     Bouncer::allow($authUser)->to('write', $model);
                     Bouncer::allow($authUser)->to('read', $model);
@@ -82,7 +82,8 @@ class ShareDialogController extends Controller
                 foreach ($users as $user) {
                     $user->ability = $mapArray[$user->id];
                 }
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users]);
+
+                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'buttonConfig' => $button]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
