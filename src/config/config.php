@@ -6,5 +6,5 @@
 return [
     "modelPath" => "App\Models\\",
     "inertiaPath" => "Pages",
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['web', 'auth']
 ];
