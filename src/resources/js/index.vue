@@ -82,8 +82,7 @@
           <span v-if="showInvite">
             <button
               type="submit"
-              class="text-white py-2 px-12"
-              :class="buttonConfig"
+              class="bg-purple-600 hover:bg-purple-500 rounded text-sm focus:outline-none text-white py-2 px-12"
             >
               Invite
             </button>
@@ -93,7 +92,7 @@
     </div>
 
     <!-- INVITE LINK -->
-    <invitelink :buttonConfig="buttonConfig"></invitelink>
+    <invitelink></invitelink>
 
     <!-- INVITED USERS  -->
     <users
@@ -149,7 +148,6 @@ export default {
   props: {
     entity: {},
     users: Array,
-    buttonConfig: {},
   },
   mounted() {
     this.generateUsersAbilities();

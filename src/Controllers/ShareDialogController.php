@@ -32,7 +32,6 @@ class ShareDialogController extends Controller
             $entityModel = substr($entityCapitalize, 0, -1);
             $entityModelSmall = substr($entity, 0, -1);
             $modelClass = config('share-dialog.modelPath') . $entityModel;
-            $button = config('share-dialog.button');
             if (class_exists($modelClass)) {
 
 
@@ -83,7 +82,7 @@ class ShareDialogController extends Controller
                     $user->ability = $mapArray[$user->id];
                 }
 
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'buttonConfig' => $button]);
+                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users]);
             } else {
                 return back()->withErrors("Model does not exist");
             }

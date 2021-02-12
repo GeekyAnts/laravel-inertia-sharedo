@@ -32,7 +32,11 @@
       </multiselect>
     </span>
     <span>
-      <button class="py-2 px-5" :class="buttonConfig">Copy Invite Link</button>
+      <button
+        class="bg-purple-600 hover:bg-purple-500 rounded text-sm focus:outline-none text-white py-2 px-5"
+      >
+        Copy Invite Link
+      </button>
     </span>
   </div>
 </template>
@@ -41,9 +45,6 @@ import Multiselect from "vue-multiselect";
 export default {
   components: {
     Multiselect,
-  },
-  props: {
-    buttonConfig: Array,
   },
   data() {
     return {
