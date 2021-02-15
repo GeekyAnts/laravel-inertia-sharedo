@@ -9,11 +9,15 @@
 
 Adds Share Functionality in your Laravel Projects.
 
+---
+
 ## Introduction
 
 Share-dialog is a composer package for laravel projects which allows other users to read/write your project's entities.
 
 It helps in managing roles and permissions for any app using Eloquent models. You can assign read or write ability to the user with whom you want to share your entity and remove the ability if you want to.
+
+---
 
 ## Prerequisites
 
@@ -52,11 +56,13 @@ Finally, run the migrations:
 php artisan migrate
 ```
 
-### VueMultiSelect
+### Vue-multiselect
 
 ```
 npm install vue-multiselect --save
 ```
+
+---
 
 ## Installation
 
