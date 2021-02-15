@@ -5,5 +5,6 @@
  */
 return [
     "modelPath" => "App\Models\\",
-    'middleware' => ['web', 'auth']
+    'middleware' => ['web', 'auth'],
+    'restrict-entities' => [],
 ];

@@ -2,7 +2,9 @@
 
 namespace Geekyants\ShareDialog;
 
+use Geekyants\ShareDialog\Middleware\RestrictEntities;
 use Illuminate\Support\ServiceProvider;
+
 
 class ShareDialogServiceProvider extends ServiceProvider
 {
@@ -19,31 +21,13 @@ class ShareDialogServiceProvider extends ServiceProvider
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__ . '/./routes/web.php');
 
+        app('router')->aliasMiddleware('restrict-entities', RestrictEntities::class);
+
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/./config/config.php' => config_path('share-dialog.php'),
             ], 'config');
 
-
-            // Publishing the views.
-            // $this->publishes([
-            //     __DIR__ . '/./resources/views' => resource_path('views/vendor/share-dialog'),
-            // ], 'views');
-
-            // Publishing assets.
-            // $this->publishes([
-            //     __DIR__ . '/./resources/css' => resource_path('/css/'),
-            // ], 'assets');
-
-            // $this->publishes([
-            //     __DIR__ . '/./resources/js' => resource_path('/js/'),
-            // ], 'assets');
-
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/share-dialog'),
-            ], 'lang');*/
 
             // Registering package commands.
             $this->commands([
