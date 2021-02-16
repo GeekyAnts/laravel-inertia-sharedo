@@ -14,12 +14,13 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Silber\Bouncer\Database\Queries\Abilities;
 use Illuminate\Support\Facades\DB;
+use Geekyants\ShareDialog\Events\UserInvited;
+
 
 
 
 class ShareDialogController extends Controller
 {
-
 
 
 
@@ -35,6 +36,7 @@ class ShareDialogController extends Controller
 
 
             if (class_exists($modelClass)) {
+
 
                 $authUser = Auth::user();
 
@@ -101,6 +103,7 @@ class ShareDialogController extends Controller
             'email' => $email,
             'password' => Hash::make('user'),
         ]);
+
         return $user;
     }
 
@@ -142,6 +145,7 @@ class ShareDialogController extends Controller
                     RemovePreviousAbilties::removeAbilties($user, $model, $modelClass);
                     $message = "User Removed!";
                 }
+                event(new UserInvited($user, $request->ability, $entityClass, $model));
             }
             return redirect()->route('share-dialog', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('success', $message);
         } catch (\Exception $e) {
