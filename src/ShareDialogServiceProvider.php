@@ -2,10 +2,12 @@
 
 namespace Geekyants\ShareDialog;
 
-use Geekyants\ShareDialog\Listeners\UserInvitedListener;
 use Geekyants\ShareDialog\Middleware\RestrictEntities;
 use Illuminate\Support\ServiceProvider;
 use Geekyants\ShareDialog\Providers\EventServiceProvider;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
+
 
 
 class ShareDialogServiceProvider extends ServiceProvider
@@ -15,6 +17,18 @@ class ShareDialogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+     
+        Inertia::share('flash',function(Request $request) {
+            return [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ];
+        },
+    );
+
+
+
         /*
          * Optional methods to load your package assets
          */
@@ -60,10 +74,6 @@ class ShareDialogServiceProvider extends ServiceProvider
 
         //register the event service provider
 
-        // \Illuminate\Support\Facades\Event::listen(
-        //     UserInvited::class,
-        //     UserInvitedListener::class
-        // );
         // Register the main class to use with the facade
         $this->app->singleton('share-dialog', function () {
             return new ShareDialog;
