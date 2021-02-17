@@ -29,6 +29,7 @@ class SendUserAbilityChangedNotification
     public function handle(UserAbilityChanged $event)
     {
         $user = $event->user;
+        if(config('share-dialog.sendEmail'))
         $user->notify(new UserInvitedNotificaton($event->ability, $event->entity, $event->model));
     }
 }

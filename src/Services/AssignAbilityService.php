@@ -32,7 +32,6 @@ class AssignAbilityService{
                 RemovePreviousAbiltiesService::removeAbilties($user, $model, $modelClass);
                 $message = "User Removed!";
             }
-                if(config('share-dialog.sendEmail'))
                 event(new UserAbilityChanged($user, $ability, $entityClass, $model));
             
           
