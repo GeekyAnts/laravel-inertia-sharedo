@@ -3,14 +3,14 @@
 namespace GeekyAnts\ShareDialog\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Geekyants\ShareDialog\Events\UserInvited;
-use Geekyants\ShareDialog\Listeners\UserInvitedListener;
+use Geekyants\ShareDialog\Events\UserAbilityChanged;
+use Geekyants\ShareDialog\Listeners\SendUserAbilityChangedNotification;
 
 class EventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        UserInvited::class => [
-            UserInvitedListener::class,
+        UserAbilityChanged::class => [
+            SendUserAbilityChangedNotification::class,
         ]
     ];
 

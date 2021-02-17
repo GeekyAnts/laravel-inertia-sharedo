@@ -38,9 +38,7 @@ class ShareDialogInstallCommand extends Command
      */
     public function handle()
     {
-        // $this->publishes([
-        //     __DIR__ . '/./config/config.php' => config_path('share-dialog.php'),
-        // ], 'config');
+    
         copy(__DIR__ . '/resources/js/share-dialog.js', resource_path('js/share-dialog.js'));
         copy(__DIR__ . '/resources/css/share-dialog.css', resource_path('css/share-dialog.css'));
         copy(__DIR__ . '/resources/views/share-dialog.blade.php', resource_path('views/share-dialog.blade.php'));
@@ -50,4 +48,5 @@ class ShareDialogInstallCommand extends Command
         $this->info('Share-Dialog scaffolding installed successfully.');
         $this->info('Please run "npm install && npm run dev" to compile your fresh scaffolding.');
     }
+   
 }

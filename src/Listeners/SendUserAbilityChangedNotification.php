@@ -2,13 +2,13 @@
 
 namespace Geekyants\ShareDialog\Listeners;
 
-use Geekyants\ShareDialog\Events\UserInvited;
+use Geekyants\ShareDialog\Events\UserAbilityChanged;
 use GeekyAnts\ShareDialog\Notifications\UserInvitedNotification;
 use Geekyants\ShareDialog\Notifications\UserInvitedNotificaton;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UserInvitedListener
+class SendUserAbilityChangedNotification
 {
     /**
      * Create the event listener.
@@ -26,7 +26,7 @@ class UserInvitedListener
      * @param  UserInvited  $event
      * @return void
      */
-    public function handle(UserInvited $event)
+    public function handle(UserAbilityChanged $event)
     {
         $user = $event->user;
         $user->notify(new UserInvitedNotificaton($event->ability, $event->entity, $event->model));

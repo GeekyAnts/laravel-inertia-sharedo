@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserInvited
+class UserAbilityChanged
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -25,7 +25,6 @@ class UserInvited
     public $entity;
     public function __construct($user, $ability, $entityClass, $model)
     {
-
         $this->user = $user;
         $this->ability = $ability;
         $this->entity = $entityClass;
