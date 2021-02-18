@@ -9,7 +9,6 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 
-
 class ShareDialogServiceProvider extends ServiceProvider
 {
     /**
@@ -34,7 +33,7 @@ class ShareDialogServiceProvider extends ServiceProvider
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'share-dialog');
         $this->loadViewsFrom(__DIR__ . '/./resources/views', 'share-dialog');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/./migrations');
         $this->loadRoutesFrom(__DIR__ . '/./routes/web.php');
         app('router')->aliasMiddleware('restrict-entities', RestrictEntities::class);
 
@@ -65,14 +64,14 @@ class ShareDialogServiceProvider extends ServiceProvider
     {
 
 
-
+       //register the event service provider
         $this->app->register(EventServiceProvider::class);
 
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__ . '/./config/config.php', 'share-dialog');
 
 
-        //register the event service provider
+        
 
         // Register the main class to use with the facade
         $this->app->singleton('share-dialog', function () {
