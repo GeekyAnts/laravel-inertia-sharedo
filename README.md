@@ -24,7 +24,7 @@ It helps in managing roles and permissions for any app using Eloquent models. Yo
 
 Make sure you have [Inertia,](https://inertiajs.com/)[Tailwind](https://tailwindcss.com/) and [Vue](https://vuejs.org/) installed.
 
-If you have [Bouncer](https://github.com/JosephSilber/bouncer) and [Vue-Multiselect](https://vue-multiselect.js.org/) pre-installed you can move to the [](https://www.notion.so/Installation-3fb74113692841c4b18722aad700b76d)[Installation]() section.
+If you have [Bouncer](https://github.com/JosephSilber/bouncer) and [Vue-Multiselect](https://vue-multiselect.js.org/) pre-installed you can move to the [Installation](###installation) section.
 
 ### **Bouncer**
 
