@@ -6,7 +6,7 @@ Adds Share Functionality in your Laravel Projects.
 [![Quality Score](https://img.shields.io/scrutinizer/g/geekyants/share-dialog.svg?style=flat-square)](https://scrutinizer-ci.com/g/geekyants/share-dialog)
 [![Total Downloads](https://img.shields.io/packagist/dt/geekyants/share-dialog.svg?style=flat-square)](https://packagist.org/packages/geekyants/share-dialog)
 
-![Mult-User-Todo](./public/images/share-dialog.png)
+![Mult-User-Todo](./public/images/share-dialog.gif)
 
 
 
