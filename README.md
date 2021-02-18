@@ -121,13 +121,12 @@ then visit
 `{APP_URL}/share-dialog/projects/123`
 
 > Note: The entity_name should have the same name as that of the database migration corresponding to the model that you want to share.
-
+<br><br>
 
  **Share-Dialog sends error messages back to your application in the error props.**
 
 
-
-If you invite a user which is not present in your database, share-dialog automatically creates it in your users table. Also, a new entry is inserted into the new_users_share_dialog table referencing the **user's id** as a foreign key and **has_ever_logged_in property** to false.
+If you invite a user which is not present in your database, share-dialog automatically creates it in your users table. Also, a new entry is inserted into the new_users_share_dialog table referencing the **user's id** as a foreign key and setting **has_ever_logged_in** property to false.<br><br>
 
 > Note: To restrict the other users from accessing your entities you have to explicitly use the Bouncer methods. You can check them out [here](https://github.com/JosephSilber/bouncer#cheat-sheet).
 
