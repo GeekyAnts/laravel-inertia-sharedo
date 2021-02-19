@@ -7,6 +7,7 @@ use App\Models\User;
 use Bouncer;
 use Illuminate\Support\Facades\Hash;
 use Geekyants\ShareDialog\Events\UserAbilityChanged;
+use Illuminate\Support\Facades\DB;
 
 class AssignAbilityService{
 
@@ -19,6 +20,10 @@ class AssignAbilityService{
             $user = User::where('email', $email['email'])->first();
             if (!$user) {
                 $user = self::createUser($email['email']);
+                DB::table('new_users_shared_dialog')->insert([
+                    'user_id' => $user->id,
+                    'has_ever_logged_in' => "false"
+                ]);
                 $newUser = true;
                 $message = "Users Invited!";
             }
@@ -32,7 +37,7 @@ class AssignAbilityService{
                 RemovePreviousAbiltiesService::removeAbilties($user, $model, $modelClass);
                 $message = "User Removed!";
             }
-                event(new UserAbilityChanged($user, $ability, $entityClass, $model));
+           event(new UserAbilityChanged($user, $ability, $entityClass, $model));
             
           
         }

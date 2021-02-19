@@ -5,7 +5,7 @@
  */
 return [
     "modelPath" => "App\Models\\",
-    'middleware' => ['web', 'auth', 'restrict'],
+    'middleware' => ['web', 'auth'],
     'restrict-entities' => [],
     "sendEmail"=> true,
 ];

@@ -2,10 +2,11 @@
 
 namespace Geekyants\ShareDialog;
 
-use Geekyants\ShareDialog\Listeners\UserInvitedListener;
 use Geekyants\ShareDialog\Middleware\RestrictEntities;
 use Illuminate\Support\ServiceProvider;
 use Geekyants\ShareDialog\Providers\EventServiceProvider;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 
 class ShareDialogServiceProvider extends ServiceProvider
@@ -15,12 +16,24 @@ class ShareDialogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+     
+        Inertia::share('flash',function(Request $request) {
+            return [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ];
+        },
+    );
+
+
+
         /*
          * Optional methods to load your package assets
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'share-dialog');
         $this->loadViewsFrom(__DIR__ . '/./resources/views', 'share-dialog');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/./migrations');
         $this->loadRoutesFrom(__DIR__ . '/./routes/web.php');
         app('router')->aliasMiddleware('restrict-entities', RestrictEntities::class);
 
@@ -51,19 +64,15 @@ class ShareDialogServiceProvider extends ServiceProvider
     {
 
 
-
+       //register the event service provider
         $this->app->register(EventServiceProvider::class);
 
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__ . '/./config/config.php', 'share-dialog');
 
 
-        //register the event service provider
+        
 
-        // \Illuminate\Support\Facades\Event::listen(
-        //     UserInvited::class,
-        //     UserInvitedListener::class
-        // );
         // Register the main class to use with the facade
         $this->app->singleton('share-dialog', function () {
             return new ShareDialog;
