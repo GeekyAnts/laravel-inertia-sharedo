@@ -2,12 +2,13 @@
 
 namespace Geekyants\ShareDialog;
 
-use Geekyants\ShareDialog\Listeners\UserInvitedListener;
+
 use Geekyants\ShareDialog\Middleware\RestrictEntities;
 use Illuminate\Support\ServiceProvider;
 use Geekyants\ShareDialog\Providers\EventServiceProvider;
-
-
+use Geekyants\ShareDialog\Middleware\ShareInertiaData;
+use Laravel\Ui\UiCommand;
+use Geekyants\ShareDialog\ShareDialogPreset;
 class ShareDialogServiceProvider extends ServiceProvider
 {
     /**
@@ -15,12 +16,23 @@ class ShareDialogServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'share-dialog');
+
+
+        UiCommand::macro('share-dialog', function ($command) {
+          ShareDialogPreset::install();
+
+            $command->info('Inertia.js scaffolding installed successfully.');
+            $command->info('Please run "composer update, npm install && npm run dev" to compile your fresh scaffolding.');
+        });
+
+     
+  
+        $this->bootInertia();
+
+
+       
         $this->loadViewsFrom(__DIR__ . '/./resources/views', 'share-dialog');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/./migrations');
         $this->loadRoutesFrom(__DIR__ . '/./routes/web.php');
         app('router')->aliasMiddleware('restrict-entities', RestrictEntities::class);
 
@@ -38,9 +50,7 @@ class ShareDialogServiceProvider extends ServiceProvider
 
 
             // Registering package commands.
-            $this->commands([
-                ShareDialogInstallCommand::class,
-            ]);
+         
         }
     }
 
@@ -58,15 +68,17 @@ class ShareDialogServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/./config/config.php', 'share-dialog');
 
 
-        //register the event service provider
 
-        // \Illuminate\Support\Facades\Event::listen(
-        //     UserInvited::class,
-        //     UserInvitedListener::class
-        // );
         // Register the main class to use with the facade
         $this->app->singleton('share-dialog', function () {
             return new ShareDialog;
         });
+    }
+    protected function bootInertia()
+    {
+       
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('web', ShareInertiaData::class);
+    
     }
 }
