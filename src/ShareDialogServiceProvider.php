@@ -6,7 +6,6 @@ namespace Geekyants\ShareDialog;
 
 use Geekyants\ShareDialog\Middleware\RestrictEntities;
 use Illuminate\Support\ServiceProvider;
-use Geekyants\ShareDialog\Providers\EventServiceProvider;
 use Geekyants\ShareDialog\Middleware\ShareInertiaData;
 use Laravel\Ui\UiCommand;
 use Geekyants\ShareDialog\ShareDialogPreset;
@@ -65,8 +64,6 @@ class ShareDialogServiceProvider extends ServiceProvider
     {
 
 
-       //register the event service provider
-        $this->app->register(EventServiceProvider::class);
 
         // Automatically apply the package configuration
         $this->mergeConfigFrom(__DIR__ . '/./config/config.php', 'share-dialog');
