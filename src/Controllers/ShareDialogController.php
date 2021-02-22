@@ -38,12 +38,12 @@ class ShareDialogController extends Controller
                 $model['entity_name'] = $entityModelSmall;
 
                 //if auth user does not own model
-                if ($model->user_id != $authUser->id && Bouncer::cannot('write', $model)) {
+                if ($model->user->id != $authUser->id && Bouncer::cannot('write', $model)) {
                     return back()->withErrors("You are not authorized!");
                 }
 
                 //else assign ability to auth user
-                if ($authUser->id == $model->user_id) {
+                if ($authUser->id == $model->user->id) {
                     Bouncer::allow($authUser)->toOwn($model);
                     Bouncer::allow($authUser)->to('write', $model);
                     Bouncer::allow($authUser)->to('read', $model);

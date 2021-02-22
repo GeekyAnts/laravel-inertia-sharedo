@@ -143,6 +143,8 @@ npm run dev
 
 ## Usage
 
+> You must define a relation **`user`** on the entity model that you want to share. The relation should return the instance of the user who created it.
+
 To share your entity with other users visit-
 
  `{APP_URL}/share-dialog/{entity_name}/{entity_id}`
