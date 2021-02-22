@@ -26,7 +26,7 @@ class InvitedUsersService
         $invitedUsers = [];
         $mapArray = array();
         foreach ($users as $index => $key) {
-            if ($key->entity_id != $model->user_id) {
+            if ($key->entity_id != $model->user->id) {
                 $key->name = ($key->name == "read") ? "Read" : "Can Edit";
                 $mapArray[$key->entity_id] = $key->name;
                 array_push($invitedUsers, $key->entity_id);
