@@ -24,7 +24,7 @@ It helps in managing roles and permissions for any app using Eloquent models. Yo
 
 ## Prerequisites
 
-If you have [Tailwind](https://tailwindcss.com/) and [Bouncer](https://github.com/JosephSilber/bouncer) pre-installed you can move to the [](https://www.notion.so/Installation-3fb74113692841c4b18722aad700b76d)[Installation]() section.
+If you have [Tailwind](https://tailwindcss.com/) and [Bouncer](https://github.com/JosephSilber/bouncer) pre-installed you can move to the [Installation](###installation) section.
 
 ### Tailwind
 
@@ -190,12 +190,21 @@ You can customize the functionality of share-dialog easily by making changes in 
     'restrict-entities' => ['files'],
     ```
 
-4. ShareDialog can also send email notifications to the users when they are given access to an entity. [I](http://access.Id)f you want to enable it you can set `sendEmail` to true in the share-dialog.config file. Make sure you have specified mail configuration in your .env file.
+4. You can also send email notifications to the users when they are given access to an entity.
 
-     ```php
-     'sendEmail' => true
-     ```
+   ShareDialog fires an `UserAbilityChanged` event when the user's access gets changed and attaches the `SendUserAbilityChangedNotification` listener to it. If you want to send email notification then in your EventServiceProvider.
 
+   ```php
+   use Geekyants\ShareDialog\Events\UserAbilityChanged;
+   use Geekyants\ShareDialog\Listeners\SendUserAbilityChangedNotification;
+   protected $listen = [
+     ...
+          UserAbilityChanged::class => [
+            SendUserAbilityChangedNotification::class,
+        ]
+        
+    ];
+    ```
     You can also modify the email template by publishing the share-dialog mail resources. After running this command, the mail notification template will be located in the 
 
     `resources/vendor/share-dialog/mail directory.`
@@ -204,9 +213,9 @@ You can customize the functionality of share-dialog easily by making changes in 
     php artisan vendor:publish  --tag="mail"
     ```
 
-5. ShareDialog fires an **`UserAbilityChanged`** event when the user's access gets changed. If you want to attach your own listeners to that event you can add them to the listener's property in the EventServiceProvider of your application.
 
-    For example, if you want to to attach ``SendSlackNotification`` listener to the event then 
+
+    You can also attach your own listeners to the event.For example, if you want to to attach ``SendSlackNotification`` listener to the event then 
 
     ```php
     use Geekyants\ShareDialog\Events\UserAbilityChanged;

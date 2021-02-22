@@ -92,7 +92,7 @@
     </div>
 
     <!-- INVITE LINK -->
-    <invitelink></invitelink>
+    <!-- <invitelink></invitelink> -->
 
     <!-- INVITED USERS  -->
     <users
