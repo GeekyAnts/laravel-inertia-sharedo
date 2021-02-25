@@ -11,7 +11,6 @@
     :options="tagOptions"
     :multiple="true"
     :taggable="true"
-    preserveSearch="true"
     @tag="addTag"
   >
     <template slot="option" slot-scope="props">
