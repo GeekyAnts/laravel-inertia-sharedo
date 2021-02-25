@@ -9,9 +9,9 @@
                 <span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
+                        class="h-5 w-6"
                         viewBox="0 0 20 20"
-                        fill="currentColor"
+                        fill="currentColor fill-current text-black"
                     >
                         <path
                             fill-rule="evenodd"
@@ -20,7 +20,7 @@
                         />
                     </svg>
                 </span>
-                <span>{{ user.email }}</span>
+                <span class="text-base text-gray-500">{{ user.email }}</span>
             </span>
             <span>
                 <multiselect
@@ -93,6 +93,10 @@ export default {
     outline: none !important;
     box-shadow: none !important;
 }
+/deep/ ul > li:nth-child(3) span span {
+    color: red;
+}
+
 /deep/ .multiselect__option--highlight {
     background: #d3eeff !important;
     color: black !important;
@@ -138,12 +142,17 @@ export default {
 /deep/ .multiselect__tags:hover {
     background-color: rgba(128, 128, 128, 0.2);
 }
+/deep/ .multiselect__option--selected {
+    font-weight: normal;
+    background-color: white;
+}
 /deep/ .mutliselect__select:hover::before .multiselect__tags {
     background-color: rgba(128, 128, 128, 0.2);
 }
 /deep/ .multiselect__single {
     font-size: 14.4px;
     color: #4b4b4b;
+    font-weight: 500;
 }
 /deep/ .multiselect__tags:hover .multiselect__single {
     padding-left: 5px;
