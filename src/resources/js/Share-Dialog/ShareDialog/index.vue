@@ -10,7 +10,7 @@
             <form
                 @submit.prevent="addNewUser"
                 @keypress.enter.prevent
-                class="flex p-3 border-b border-gray-300 flex-row space-x-5 space-y-0"
+                class="flex p-3 border-b border-gray-200 flex-row space-x-5 space-y-0"
             >
                 <span class="font-bold text-base pt-1">To:</span>
 
@@ -22,22 +22,22 @@
                 </div>
 
                 <span
-                    class="flex pt-1 flex-grow flex-row space-y-0 space-x-10 justify-center pl-1"
+                    class="flex pt-1 flex-grow flex-row justify-between"
                     v-if="showInvite"
                 >
                     <span v-if="showInvite">
                         <access ref="access"></access>
                     </span>
-                    <span v-if="showInvite">
-                        <button
-                            type="submit"
-                            tabindex="0"
-                            @keyup.enter="addNewUser"
-                            class="focus:outline-none focus:ring focus:border-blue-300 bg-purple-600 hover:bg-purple-500 rounded text-sm focus:outline-none text-white py-2 px-16 w-full"
-                        >
-                            Invite
-                        </button>
-                    </span>
+                    <!-- <span v-if="showInvite"> -->
+                    <button
+                        type="submit"
+                        tabindex="0"
+                        @keyup.enter="addNewUser"
+                        class="focus:outline-none focus:ring focus:border-blue-300 bg-purple-600 hover:bg-purple-500 rounded text-sm focus:outline-none text-white h-10 px-16"
+                    >
+                        Invite
+                    </button>
+                    <!-- </span> -->
                 </span>
             </form>
         </div>
@@ -135,12 +135,12 @@ export default {
         handleSubmit(formData) {
             console.log("tag", this.tagValue);
             this.$refs.children.tagValue = null;
+            this.showInvite = false;
             this.$inertia.post("/share-dialog", formData, {
                 onSuccess: () => {
                     this.usersAbilities.length = 0;
                     this.$refs.children.tagValue = [];
                     this.generateUsersAbilities();
-                    this.alertOpen = true;
                 }
             });
         }
