@@ -1,44 +1,14 @@
 <template>
-    <div>
-        <div
-            v-for="(user, index) in users"
-            :key="index"
-            class="p-4 flex border-b border-gray-100 space-x-3"
-        >
-            <span class="flex items-center space-x-2">
-                <span>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                    >
-                        <path
-                            fill-rule="evenodd"
-                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
-                </span>
-                <span>{{ user.email }}</span>
-            </span>
-            <span>
-                <multiselect
-                    v-model="usersAbilties[index]"
-                    :id="index"
-                    track-by="value"
-                    label="ability"
-                    @select="onSelect"
-                    placeholder="Select one"
-                    :options="options"
-                    :searchable="false"
-                    :show-labels="false"
-                    :allow-empty="false"
-                >
-                </multiselect>
-            </span>
-        </div>
-    </div>
+    <multiselect
+        v-model="value"
+        track-by="ability"
+        label="ability"
+        :options="options"
+        :searchable="false"
+        :show-labels="false"
+        :allow-empty="false"
+    >
+    </multiselect>
 </template>
 <script>
 import Multiselect from "vue-multiselect";
@@ -46,13 +16,12 @@ export default {
     components: {
         Multiselect
     },
-    props: {
-        entity: {},
-        users: Array,
-        usersAbilties: Array
-    },
     data() {
         return {
+            value: {
+                ability: "Read",
+                value: "read"
+            },
             options: [
                 {
                     ability: "Read",
@@ -61,10 +30,6 @@ export default {
                 {
                     ability: "Can Edit",
                     value: "write"
-                },
-                {
-                    ability: "Remove",
-                    value: "remove"
                 }
             ]
         };
