@@ -1,6 +1,6 @@
 <template>
     <div
-        class="main bg-white h-screen px-1 py-2 w-screen md:w-1/2 font-sans text-sm text-gray-600"
+        class="main bg-white h-screen px-2 py-2 w-screen md:w-full font-sans text-sm text-gray-600"
     >
         <!-- success and error mesaage" -->
         <!-- <flashmessage></flashmessage> -->
@@ -10,25 +10,25 @@
             <form
                 @submit.prevent="addNewUser"
                 @keypress.enter.prevent
-                class="flex p-3 border-b border-gray-200 flex-row space-x-5 space-y-0"
+                class="flex p-2 border-b border-gray-100 flex-row space-x-5 space-y-0"
             >
                 <span class="font-bold text-base pt-1">To:</span>
 
                 <div class="w-1/2">
                     <tag
-                        v-on:enableInvite="enableInvite($event)"
+                        v-on:enableInvite="enableInvite"
                         ref="children"
+                        v-on:tagsEmpty="tagsEmpty"
                     ></tag>
                 </div>
 
                 <span
-                    class="flex pt-1 flex-grow flex-row justify-between"
+                    class="flex pt-1 flex-grow flex-row justify-around"
                     v-if="showInvite"
                 >
                     <span v-if="showInvite">
                         <access ref="access"></access>
                     </span>
-                    <!-- <span v-if="showInvite"> -->
                     <button
                         type="submit"
                         tabindex="0"
@@ -37,7 +37,6 @@
                     >
                         Invite
                     </button>
-                    <!-- </span> -->
                 </span>
             </form>
         </div>
@@ -112,11 +111,16 @@ export default {
                 entity_name: this.entity.entity_name
             };
             this.email = "";
-            this.showInvite = false;
+            this.tagsEmpty();
+            this.$refs.children.oldValues = [];
+            this.$refs.children.tagValue = [];
             this.handleSubmit(formData);
         },
         updateAccessForUser: function(data) {
             this.handleSubmit(data);
+        },
+        tagsEmpty() {
+            this.showInvite = false;
         },
         generateUsersAbilities() {
             this.users.forEach((user, idx) => {
@@ -133,13 +137,10 @@ export default {
             });
         },
         handleSubmit(formData) {
-            console.log("tag", this.tagValue);
-            this.$refs.children.tagValue = null;
-            this.showInvite = false;
+            console.log("paji", this.$refs.children.oldValues);
             this.$inertia.post("/share-dialog", formData, {
                 onSuccess: () => {
                     this.usersAbilities.length = 0;
-                    this.$refs.children.tagValue = [];
                     this.generateUsersAbilities();
                 }
             });
