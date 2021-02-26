@@ -16,7 +16,7 @@
             @tag="addTag"
             :preserveSearch="true"
         >
-            <template slot="option" slot-scope="props" class="cyrus">
+            <template slot="option" slot-scope="props">
                 <div
                     v-if="validEmail"
                     class="option__desc p-3 shadow-xl bg-blue-100 overflow-x-auto text-gray-600 hover:text-white hover:bg-blue-700 rounded-md"
@@ -27,8 +27,12 @@
                 </div>
                 <div v-else class="hidden"></div>
             </template>
-            <template slot="afterList" slot-scope="props" v-if="!validEmail">
+            <template slot="noResult">
+                <div class="hidden"></div>
+            </template>
+            <template slot="afterList">
                 <div
+                    v-if="!validEmail"
                     class="option_noResult p-3 shadow-xl w-full bg-white border-2 border-gray-100 p-2 text-gray-500 text-base flex items-center justify-center rounded-md"
                 >
                     <span class="invalid-email text-base">
@@ -36,7 +40,7 @@
                     </span>
                 </div>
             </template>
-            <template slot="noOptions" slot-scope="props">
+            <template slot="noOptions">
                 <div class="option__desc hidden"></div>
             </template>
         </multiselect>

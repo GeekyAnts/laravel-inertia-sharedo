@@ -137,7 +137,6 @@ export default {
             });
         },
         handleSubmit(formData) {
-            console.log("paji", this.$refs.children.oldValues);
             this.$inertia.post("/share-dialog", formData, {
                 onSuccess: () => {
                     this.usersAbilities.length = 0;
