@@ -54,10 +54,10 @@ export default {
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-#input-email:focus {
-    outline: none !important;
-    box-shadow: none !important;
+/deep/ ul > li:nth-child(3) span span {
+    color: red;
 }
+
 /deep/ .multiselect__option--highlight {
     background: #d3eeff !important;
     color: black !important;
@@ -103,12 +103,17 @@ export default {
 /deep/ .multiselect__tags:hover {
     background-color: rgba(128, 128, 128, 0.2);
 }
+/deep/ .multiselect__option--selected {
+    font-weight: normal;
+    background-color: white;
+}
 /deep/ .mutliselect__select:hover::before .multiselect__tags {
     background-color: rgba(128, 128, 128, 0.2);
 }
 /deep/ .multiselect__single {
     font-size: 14.4px;
     color: #4b4b4b;
+    font-weight: 500;
 }
 /deep/ .multiselect__tags:hover .multiselect__single {
     padding-left: 5px;

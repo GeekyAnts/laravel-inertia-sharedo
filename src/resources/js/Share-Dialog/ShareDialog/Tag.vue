@@ -1,40 +1,46 @@
 <template>
-    <multiselect
-        id="input-email"
-        v-model="tagValue"
-        @search-change="handleTagChange"
-        noResult="Enter Valid Email"
-        tag-placeholder=""
-        placeholder="Enter Emails"
-        label="email"
-        track-by="email"
-        :options="tagOptions"
-        :multiple="true"
-        :taggable="true"
-        @tag="addTag"
-    >
-        <template slot="option" slot-scope="props">
-            <div
-                v-if="validEmail"
-                class="option__desc p-3 shadow-xl bg-blue-100 overflow-x-auto text-gray-600 hover:text-white hover:bg-blue-700 rounded-md"
-            >
-                <span class="valid-email text-base " v-if="validEmail">
-                    Create "{{ props.option.label }}"
-                </span>
-            </div>
-            <div
-                v-if="!validEmail"
-                class="option_desc p-3 shadow-xl w-full bg-white border-2 border-gray-100 p-2 text-gray-500 text-base flex items-center justify-center rounded-md"
-            >
-                <span class="invalid-email text-base">
-                    Enter valid email
-                </span>
-            </div>
-        </template>
-        <template slot="noOptions" slot-scope="props">
-            <div class="option__desc hidden"></div>
-        </template>
-    </multiselect>
+    <div>
+        <multiselect
+            id="input-email"
+            v-model="tagValue"
+            @search-change="handleTagChange"
+            noResult="Enter Valid Email"
+            tag-placeholder=""
+            placeholder="Enter Emails"
+            label="email"
+            track-by="email"
+            :options="tagOptions"
+            :multiple="true"
+            @remove="removeTag"
+            :taggable="true"
+            @tag="addTag"
+            :preserveSearch="true"
+        >
+            <template slot="option" slot-scope="props" class="cyrus">
+                <div
+                    v-if="validEmail"
+                    class="option__desc p-3 shadow-xl bg-blue-100 overflow-x-auto text-gray-600 hover:text-white hover:bg-blue-700 rounded-md"
+                >
+                    <span class="valid-email text-base " v-if="validEmail">
+                        Create "{{ props.option.label }}"
+                    </span>
+                </div>
+                <div v-else class="hidden"></div>
+            </template>
+            <template slot="afterList" slot-scope="props" v-if="!validEmail">
+                <div
+                    class="option_noResult p-3 shadow-xl w-full bg-white border-2 border-gray-100 p-2 text-gray-500 text-base flex items-center justify-center rounded-md"
+                >
+                    <span class="invalid-email text-base">
+                        Enter valid email
+                    </span>
+                </div>
+            </template>
+            <template slot="noOptions" slot-scope="props">
+                <div class="option__desc hidden"></div>
+            </template>
+        </multiselect>
+    </div>
 </template>
 <script>
 import Multiselect from "vue-multiselect";
@@ -44,12 +50,19 @@ export default {
     },
     data() {
         return {
-            tagValue: [],
+            tagValue: [{ email: "Cyrus" }, { email: "passi" }],
+            oldValues: [],
             tagOptions: [],
             email: [],
             validEmail: false,
             tags: ""
         };
+    },
+    updated() {
+        this.tagValue = this.oldValues;
+        if (this.oldValues.length === 0) {
+            this.$emit("tagsEmpty");
+        }
     },
     methods: {
         addTag(newTag) {
@@ -59,8 +72,14 @@ export default {
             const tag = {
                 email: newTag
             };
-            this.tagValue.push(tag);
+            this.oldValues.push(tag);
             this.$emit("enableInvite");
+        },
+        removeTag(removedOption, id) {
+            const index = this.oldValues.indexOf(removedOption);
+            if (index > -1) {
+                this.oldValues.splice(index, 1);
+            }
         },
         handleTagChange(searchQuery, id) {
             this.validateEmail(searchQuery);
@@ -81,11 +100,6 @@ export default {
                 this.validEmail = false;
             }
         }
-    },
-    watch: {
-        email(value, oldValue) {
-            this.validateEmail(value);
-        }
     }
 };
 </script>
@@ -94,12 +108,14 @@ export default {
     outline: none !important;
     box-shadow: none !important;
 }
+
 /deep/ .multiselect__input {
     font-size: 1rem;
     border: none;
     margin-bottom: 0px;
     vertical-align: top;
-    padding: 0 0 0 0px;
+    padding: 0px;
+    width: 8rem !important;
 }
 
 /deep/ ::-webkit-input-placeholder {

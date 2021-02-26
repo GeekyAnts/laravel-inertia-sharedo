@@ -89,10 +89,6 @@ export default {
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
-#input-email:focus {
-    outline: none !important;
-    box-shadow: none !important;
-}
 /deep/ ul > li:nth-child(3) span span {
     color: red;
 }
