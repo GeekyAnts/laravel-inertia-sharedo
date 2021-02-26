@@ -1,57 +1,58 @@
 <template>
-    <div
-        class="main bg-white h-screen px-2 py-2 w-screen md:w-full font-sans text-sm text-gray-600"
-    >
-        <!-- success and error mesaage" -->
-        <!-- <flashmessage></flashmessage> -->
+  <div
+    class="main bg-white h-screen px-2 py-2 w-screen md:w-full font-sans text-sm text-gray-600"
+  >
+    <!-- success and error mesaage" -->
+    <!-- <flashmessage></flashmessage> -->
 
-        <!-- Invitation FORM -->
-        <div>
-            <form
-                @submit.prevent="addNewUser"
-                @keypress.enter.prevent
-                class="flex p-2 border-b border-gray-100 flex-row space-x-5 space-y-0"
-            >
-                <span class="font-bold text-base pt-1">To:</span>
+    <!-- Invitation FORM -->
 
-                <div class="w-1/2">
-                    <tag
-                        v-on:enableInvite="enableInvite"
-                        ref="children"
-                        v-on:tagsEmpty="tagsEmpty"
-                    ></tag>
-                </div>
+    <div>
+      <form
+        @submit.prevent="addNewUser"
+        @keypress.enter.prevent
+        class="flex p-2 border-b border-gray-100 flex-row space-x-5 space-y-0"
+      >
+        <span class="font-bold text-base pt-1">To:</span>
 
-                <span
-                    class="flex pt-1 flex-grow flex-row justify-around"
-                    v-if="showInvite"
-                >
-                    <span v-if="showInvite">
-                        <access ref="access"></access>
-                    </span>
-                    <button
-                        type="submit"
-                        tabindex="0"
-                        @keyup.enter="addNewUser"
-                        class="focus:outline-none focus:ring focus:border-blue-300 bg-purple-600 hover:bg-purple-500 rounded text-sm focus:outline-none text-white h-10 px-16"
-                    >
-                        Invite
-                    </button>
-                </span>
-            </form>
+        <div class="w-full">
+          <tag
+            v-on:enableInvite="enableInvite"
+            ref="children"
+            v-on:tagsEmpty="tagsEmpty"
+          ></tag>
         </div>
 
-        <!-- INVITE LINK -->
-        <!-- <invitelink></invitelink> -->
-
-        <!-- INVITED USERS  -->
-        <users
-            :users="users"
-            :usersAbilties="usersAbilities"
-            :entity="entity"
-            v-on:updateAccess="updateAccessForUser($event)"
-        ></users>
+        <span
+          class="flex pt-1 flex-grow flex-row justify-around w-1/2"
+          v-if="showInvite"
+        >
+          <span v-if="showInvite">
+            <access ref="access"></access>
+          </span>
+          <button
+            type="submit"
+            tabindex="0"
+            @keyup.enter="addNewUser"
+            class="focus:outline-none btn-invite focus:ring focus:border-blue-300 rounded text-sm focus:outline-none text-white h-9 px-16"
+          >
+            Invite
+          </button>
+        </span>
+      </form>
     </div>
+
+    <!-- INVITE LINK -->
+    <!-- <invitelink></invitelink> -->
+
+    <!-- INVITED USERS  -->
+    <users
+      :users="users"
+      :usersAbilties="usersAbilities"
+      :entity="entity"
+      v-on:updateAccess="updateAccessForUser($event)"
+    ></users>
+  </div>
 </template>
 <script>
 import Layout from "./Layout";
@@ -62,88 +63,96 @@ import Access from "./Access";
 import Tag from "./Tag";
 import Users from "./Users";
 export default {
-    components: {
-        Layout,
-        Multiselect,
-        users: Users,
-        invitelink: inviteLink,
-        flashmessage: FlashMessage,
-        tag: Tag,
-        access: Access
+  components: {
+    Layout,
+    Multiselect,
+    users: Users,
+    invitelink: inviteLink,
+    flashmessage: FlashMessage,
+    tag: Tag,
+    access: Access,
+  },
+  data() {
+    return {
+      usersAbilities: [],
+      showInvite: false,
+      value: {
+        ability: "Read",
+        value: "read",
+      },
+      options: [
+        {
+          ability: "Read",
+          value: "read",
+        },
+        {
+          ability: "Can Edit",
+          value: "write",
+        },
+      ],
+    };
+  },
+  props: {
+    entity: {},
+    users: Array,
+  },
+  mounted() {
+    this.generateUsersAbilities();
+  },
+  methods: {
+    enableInvite() {
+      this.showInvite = true;
     },
-    data() {
-        return {
-            usersAbilities: [],
-            showInvite: false,
-            value: {
-                ability: "Read",
-                value: "read"
-            },
-            options: [
-                {
-                    ability: "Read",
-                    value: "read"
-                },
-                {
-                    ability: "Can Edit",
-                    value: "write"
-                }
-            ]
-        };
+    addNewUser(e) {
+      e.preventDefault();
+      const formData = {
+        emails: this.$refs.children.tagValue,
+        ability: this.$refs.access.value.value,
+        entity_id: this.entity.id,
+        entity_name: this.entity.entity_name,
+      };
+      this.email = "";
+      this.tagsEmpty();
+      this.$refs.children.oldValues = [];
+      this.$refs.children.tagValue = [];
+      this.handleSubmit(formData);
     },
-    props: {
-        entity: {},
-        users: Array
+    updateAccessForUser: function (data) {
+      this.handleSubmit(data);
     },
-    mounted() {
-        this.generateUsersAbilities();
+    tagsEmpty() {
+      this.showInvite = false;
     },
-    methods: {
-        enableInvite() {
-            this.showInvite = true;
+    generateUsersAbilities() {
+      this.users.forEach((user, idx) => {
+        if (user.ability === "Read")
+          this.usersAbilities.push({
+            ability: "Read",
+            value: "read",
+          });
+        else if (user.ability == "Can Edit")
+          this.usersAbilities.push({
+            ability: "Can Edit",
+            value: "write",
+          });
+      });
+    },
+    handleSubmit(formData) {
+      this.$inertia.post("/share-dialog", formData, {
+        onSuccess: () => {
+          this.usersAbilities.length = 0;
+          this.generateUsersAbilities();
         },
-        addNewUser(e) {
-            e.preventDefault();
-            const formData = {
-                emails: this.$refs.children.tagValue,
-                ability: this.$refs.access.value.value,
-                entity_id: this.entity.id,
-                entity_name: this.entity.entity_name
-            };
-            this.email = "";
-            this.tagsEmpty();
-            this.$refs.children.oldValues = [];
-            this.$refs.children.tagValue = [];
-            this.handleSubmit(formData);
-        },
-        updateAccessForUser: function(data) {
-            this.handleSubmit(data);
-        },
-        tagsEmpty() {
-            this.showInvite = false;
-        },
-        generateUsersAbilities() {
-            this.users.forEach((user, idx) => {
-                if (user.ability === "Read")
-                    this.usersAbilities.push({
-                        ability: "Read",
-                        value: "read"
-                    });
-                else if (user.ability == "Can Edit")
-                    this.usersAbilities.push({
-                        ability: "Can Edit",
-                        value: "write"
-                    });
-            });
-        },
-        handleSubmit(formData) {
-            this.$inertia.post("/share-dialog", formData, {
-                onSuccess: () => {
-                    this.usersAbilities.length = 0;
-                    this.generateUsersAbilities();
-                }
-            });
-        }
-    }
+      });
+    },
+  },
 };
 </script>
+<style>
+.btn-invite {
+  background-color: #318dd0;
+}
+.btn-invite:hover {
+  background-color: #4682bf;
+}
+</style>
