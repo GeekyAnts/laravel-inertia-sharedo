@@ -3,7 +3,7 @@
         <div
             v-for="(user, index) in users"
             :key="index"
-            class="p-4 flex border-b border-gray-100 space-x-3"
+            class="py-4 px-1 flex border-b border-gray-100 space-x-3"
         >
             <span class="flex items-center space-x-2">
                 <span>

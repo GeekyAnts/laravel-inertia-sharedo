@@ -19,9 +19,9 @@
             <template slot="option" slot-scope="props">
                 <div
                     v-if="validEmail"
-                    class="option__desc p-3 shadow-xl bg-blue-100 overflow-x-auto text-gray-600 hover:text-white hover:bg-blue-700 rounded-md"
+                    class="btn-create max-w-xl option__desc p-3 shadow-xl bg-blue-100 overflow-x-auto text-gray-600 hover:text-white hover:bg-blue-700 rounded-md"
                 >
-                    <span class="valid-email text-base " v-if="validEmail">
+                    <span class="valid-email text-base" v-if="validEmail">
                         Create "{{ props.option.label }}"
                     </span>
                 </div>
@@ -33,7 +33,7 @@
             <template slot="afterList">
                 <div
                     v-if="!validEmail"
-                    class="option_noResult p-3 shadow-xl w-full bg-white border-2 border-gray-100 p-2 text-gray-500 text-base flex items-center justify-center rounded-md"
+                    class="option_noResult p-3 shadow-xl max-w-xl bg-white border-2 border-gray-100 p-2 text-gray-500 text-base flex items-center justify-center rounded-md"
                 >
                     <span class="invalid-email text-base">
                         Enter valid email
@@ -54,7 +54,7 @@ export default {
     },
     data() {
         return {
-            tagValue: [{ email: "Cyrus" }, { email: "passi" }],
+            tagValue: [],
             oldValues: [],
             tagOptions: [],
             email: [],
@@ -112,7 +112,9 @@ export default {
     outline: none !important;
     box-shadow: none !important;
 }
-
+/deep/ .btn-create:hover {
+    background-color: #318dd0;
+}
 /deep/ .multiselect__input {
     font-size: 1rem;
     border: none;
@@ -189,8 +191,8 @@ export default {
     background-color: rgb(255, 189, 173);
     color: red !important;
 }
-/deep/ .multiselect__tag-icon:hover:after {
-    color: #266d4d;
+/deep/ .multiselect__tag-icon:after {
+    color: #696969 !important;
 }
 /deep/ .multiselect__tag {
     background-color: rgb(230, 230, 230);
