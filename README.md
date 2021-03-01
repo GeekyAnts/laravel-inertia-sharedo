@@ -1,73 +1,70 @@
-# Laravel Inertia ShareDialog
+# LISD README
 
-Adds Share Functionality in your Laravel Projects.
+### **Laravel Inertia ShareDialog**
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/geekyants/share-dialog.svg?style=flat-square)](https://packagist.org/packages/geekyants/share-dialog)
-[![Build Status](https://img.shields.io/travis/geekyants/share-dialog/master.svg?style=flat-square)](https://travis-ci.org/geekyants/share-dialog)
-[![Quality Score](https://img.shields.io/scrutinizer/g/geekyants/share-dialog.svg?style=flat-square)](https://scrutinizer-ci.com/g/geekyants/share-dialog)
-[![Total Downloads](https://img.shields.io/packagist/dt/geekyants/share-dialog.svg?style=flat-square)](https://packagist.org/packages/geekyants/share-dialog)
+This package allows you to add a Share functionality to your Laravel projects.
 
-![ShareDialog](./public/images/share-dialog.gif)
+![https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/share-dialog.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/share-dialog.gif)
 
 ---
 
-## Introduction
+## **Introduction**
 
-Share-dialog is a composer package for laravel projects which allows other users to read/write your project's entities.
+**ShareDialog** is a composer package for Laravel projects which allows other users to read or write your project's entities.
 
-It helps in managing roles and permissions for any app using Eloquent models. You can assign read or write ability to the user with whom you want to share your entity and remove the ability if you want to.
+It helps you manage roles and permissions in an app by using Eloquent Models. You can assign read or write permissions to a user and remove permissions as required.
 
 ---
 
-## Prerequisites
+## **Prerequisites**
 
-If you have [Tailwind](https://tailwindcss.com/) and [Bouncer](https://github.com/JosephSilber/bouncer) pre-installed you can move to the [Installation](###installation) section.
+If you have [Tailwind](https://tailwindcss.com/) and [Bouncer](https://github.com/JosephSilber/bouncer) pre-installed, you can move on to the [Installation](###installation) section.
 
-### Tailwind
+### 1) **Tailwind**
 
-```bash
+Install Tailwind as shown below:
+
+```jsx
 npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
-
 ```
 
 Next, generate your tailwind.config.js file:
 
-```bash
+```jsx
 npx tailwindcss init
 ```
 
-In your tailwind.config file
+Add the following code to your tailwind.config.js file:
 
-```bash
-
-  module.exports = {
-   purge: [
-     './resources/**/*.blade.php',
-     './resources/**/*.js',
-     './resources/**/*.vue',
-   ],
+```jsx
+module.exports = {
+    purge: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+    ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-      extend: {},
+        extend: {},
     },
     variants: {
-      extend: {},
+        extend: {},
     },
     plugins: [],
-  }
+};
 ```
 
-### **Bouncer**
+### 2) **Bouncer**
 
-Install Bouncer with composer:
+Install Bouncer using composer:
 
-```bash
+```jsx
 composer require silber/bouncer v1.0.0-rc.10
 ```
 
 Add Bouncer's trait to your user model:
 
-```bash
+```jsx
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class User extends Model
@@ -76,9 +73,9 @@ class User extends Model
 }
 ```
 
-Publish the bouncer's migrations into your app's migrations directory, by running the following command:
+Run this command to publish the Bouncer's migrations to your app's migrations directory:
 
-```bash
+```jsx
 php artisan vendor:publish --tag="bouncer.migrations"
 ```
 
@@ -86,110 +83,111 @@ php artisan vendor:publish --tag="bouncer.migrations"
 
 ## **Installation**
 
-Install share-dialog package with composer
+Install the share-dialog package using composer:
 
-```bash
+```jsx
 composer require  geekyants/share-dialog
 ```
 
-After installation, move the package's config file to your project's config folder by executing the following command-
+Run this command to move the config file to your project's config folder:
 
-```bash
+```jsx
 php artisan vendor:publish  --tag="config"
 ```
 
-Moving forward, scaffold the view components present in the share-dialog package.
+Scaffold the view components present in the share-dialog package as shown below:
 
 ```jsx
 php artisan ui share-dialog
 ```
 
-A **Share-Dialog** folder containing Vuejs components would be created in your resources directory. Now, you can easily customize your share-dialog's Vuejs components. :)
+A share-dialog folder containing Vue.js components will be created in your resources directory. You can now easily customise your share-dialog's Vuejs components 🚀
 
-Now, run the migrations. After executing this command, Bouncer migrations and new_users_share_dialog table would be migrated.
+Execute this command to migrate Bouncer migrations and the new_users_share_dialog table:
 
-```bash
+```jsx
 php artisan migrate
 ```
 
-To compile and minify the JavaScript files generated by share-dialog, add this to your webpack.mix.js.
+To compile and minify the JavaScript files generated by share-dialog, add this to your webpack.mix.js file:
 
-```php
+```jsx
 .js("resources/js/share-dialog.js", "public/js")
 .vue()
 ```
 
-> Note: If your css is compiled into some other file other than `app.css` you can change it in `share-dialog.blade.php` file.
+Note: If your css is not compiled in your app.css file, you can change it in the share-dialog.blade.php file.
 
-<br>
-Install the dependenices
+Install the dependencies:
 
-```bash
+```jsx
 composer update
 npm install
 ```
 
-Finally, build your assets
+Finally, build your assets as shown below:
 
-```bash
+```jsx
 npm run dev
 ```
 
 ---
 
-## Usage
+## **Usage**
 
-> You must define a relation **`user`** on the entity model that you want to share. The relation should return the instance of the user who created it.
+You must define a relation user for the entity model that you want to share. The relation should return the instance of the user who created it.
 
-To share your entity with other users visit-
+To share your entity with other users visit:
 
-`{APP_URL}/share-dialog/{entity_name}/{entity_id}`
+```jsx
+{APP_URL}/share-dialog/{entity_name}/{entity_id}
+```
 
-For example, if you want to open share dialog for your Project model with id 123
+For example, to open a share dialog for your project model with id 123, run the following:
 
-then visit
+```
+{APP_URL}/share-dialog/projects/123;
+```
 
-`{APP_URL}/share-dialog/projects/123`
+Note: The entity_name should have the same name as that of the database migration corresponding to the model that you want to share.
 
-> Note: The entity_name should have the same name as that of the database migration corresponding to the model that you want to share.
+**share-dialog sends error messages back to your application in the error props.**
 
-**Share-Dialog sends error messages back to your application in the error props.**
+If you invite a user who is not present in your database, share-dialog automatically creates it in your users table. Also, a new entry is inserted into the new_users_share_dialog table referencing the user's id as a foreign key and sets `has_ever_logged_in property` to false.
 
-If you invite a user which is not present in your database, share-dialog automatically creates it in your users table. Also, a new entry is inserted into the new_users_share_dialog table referencing the user's id as a foreign key and `has_ever_logged_in property` to false.
+This can be useful if you want to differentiate between users created by share-dialog and users created by the normal sign-up flow.
 
-This can help you if you want to differentiate between the users created by share-dialog and users created by normal sign-up flow.<br>
-
-> To restrict the other users from accessing your entities you have to explicitly use the Bouncer methods. You can check them out [here](https://github.com/JosephSilber/bouncer#cheat-sheet).
+To restrict other users from accessing your entities, you have to explicitly use the [Bouncer methods here](https://github.com/JosephSilber/bouncer#cheat-sheet).
 
 ---
 
-## Customization
+## **Customisation**
 
-You can customize the functionality of share-dialog easily by making changes in the **share-dialog.php** file present in your config folder.
+You can customise the functionality of share-dialog easily by making changes in the share-dialog.php file present in your config folder.
 
-1. If your model files are present in some other folder other than `"App\Models\\"` you can set the `modelPath` to the path of that folder.
+1. If your model files are present in some folder other than `"App\Models\\"`, you can set the `modelPath` to the path of that folder:
 
-    ```bash
+    ```jsx
     "modelPath" => "App\Models\\"
     ```
 
-2. If you want to add your own custom middleware to the share-dialog, append it into the middleware array. For example, if you want to add the `"admin"` middleware then your middleware array would look like this-
+2. If you want to add your own custom middleware to the share-dialog, append it to the middleware array. For example, if you want to add the `"admin"` middleware, then your middleware array will look like this:
 
-    ```php
+    ```jsx
     "middleware" => ['web', 'auth','admin']
     ```
 
-3. If you want only certain entities to be shareable you can add them into the `restrict-entities` array. For example, if your want only the `files` entity to be shareable-
+3. If you want only certain entities to be shareable, you can add them to the `restrict-entities` array. For instance, if your want only the `files` entity to be shareable, your array will look like this:
 
-    ```php
+    ```jsx
     'restrict-entities' => ['files'],
     ```
 
-4. You can also send email notifications to the users when they are given access to an entity.
+4. You can also send email notifications to users when they are given access to an entity.
 
-    ShareDialog fires an `UserAbilityChanged` event when the user's access gets changed and attaches the `SendUserAbilityChangedNotification` listener to it. If you want to send email notification then in your EventServiceProvider.
+    ShareDialog fires an `UserAbilityChanged` event when the user's access gets changed and attaches the `SendUserAbilityChangedNotification` listener to it. If you want to send an email notification, then add the following in EventServiceProvider:
 
-    ```php
+    ```jsx
     use Geekyants\ShareDialog\Events\UserAbilityChanged;
     use Geekyants\ShareDialog\Listeners\SendUserAbilityChangedNotification;
     protected $listen = [
@@ -201,17 +199,17 @@ You can customize the functionality of share-dialog easily by making changes in 
      ];
     ```
 
-    You can also modify the email template by publishing the share-dialog mail resources. After running this command, the mail notification template will be located in the
+    Additionally, you can modify the email template by publishing the share-dialog mail resources. After running this command, the mail notification template will be located in the
 
-    `resources/vendor/share-dialog/mail directory.`
+    `resources/vendor/share-dialog/mail` directory:
 
-    ```php
+    ```jsx
     php artisan vendor:publish  --tag="mail"
     ```
 
-    You can also attach your own listeners to the event.For example, if you want to to attach `SendSlackNotification` listener to the event then
+    You can attach your own listeners to the event. For example, if you want to to attach `SendSlackNotification` listener to the event, you can add the following code:
 
-    ```php
+    ```jsx
     use Geekyants\ShareDialog\Events\UserAbilityChanged;
 
     ...
@@ -223,6 +221,6 @@ You can customize the functionality of share-dialog easily by making changes in 
         ];
     ```
 
-## License
+## **License**
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+Licensed under the MIT License. Please see the [License File](https://github.com/GeekyAnts/laravel-inertia-share-dialog/blob/master/LICENSE.md) for more information.
