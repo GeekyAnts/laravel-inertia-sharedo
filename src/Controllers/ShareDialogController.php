@@ -10,6 +10,7 @@ use Bouncer;
 use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
 use App\Http\Controllers\Controller;
+use Geekyants\ShareDialog\Interfaces\UserContactsInerface;
 use Geekyants\ShareDialog\Services\InvitedUsersService;
 use Geekyants\ShareDialog\Services\AssignAbilityService;
 
@@ -21,7 +22,7 @@ class ShareDialogController extends Controller
 
 
 
-    public function showShareDialog($entity, $entityId)
+    public function showShareDialog($entity, $entityId, UserContactsInerface $userContactsInerface)
     {
         try {
             $entityCapitalize = ucfirst($entity);
@@ -50,16 +51,15 @@ class ShareDialogController extends Controller
                 }
                 //get invited users  
                 $users = InvitedUsersService::getInvitedUsers($model);
-
+                $userContacts = $userContactsInerface->getUserContacts();
                 Inertia::setRootView('share-dialog');
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users]);
+                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'userContacts' => $userContacts]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
         } catch (\Exception $e) {
 
             return back()->withErrors($e->getMessage());
-
         }
     }
 
@@ -80,16 +80,13 @@ class ShareDialogController extends Controller
             //get emails from request
             $emails = $request->emails;
 
-           //assign abilities
-            $message=AssignAbilityService::assignAbilities($emails,$request->ability,$model,$modelClass,$entityClass);
+            //assign abilities
+            $message = AssignAbilityService::assignAbilities($emails, $request->ability, $model, $modelClass, $entityClass);
 
             return redirect()->route('share-dialog', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('success', $message);
-
-
         } catch (\Exception $e) {
 
             return back()->withErrors($e->getMessage());
-
         }
     }
 }
