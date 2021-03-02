@@ -10,7 +10,6 @@ use Bouncer;
 use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
 use App\Http\Controllers\Controller;
-use Geekyants\ShareDialog\Interfaces\UserContactsInerface;
 use Geekyants\ShareDialog\Services\InvitedUsersService;
 use Geekyants\ShareDialog\Services\AssignAbilityService;
 
@@ -20,9 +19,19 @@ use Geekyants\ShareDialog\Services\AssignAbilityService;
 class ShareDialogController extends Controller
 {
 
+    public function searchUsers($query)
+    {
+        if (!config('share-dialog.typehead'))
+            return response()->json(['searchUsers' => []]);
+
+        $className = config('share-dialog.typehead');
+        $controller =  new $className;
+        $users = $controller->getUserContacts($query);
+        return response()->json(['searchUsers' => $users]);
+    }
 
 
-    public function showShareDialog($entity, $entityId, UserContactsInerface $userContactsInerface)
+    public function showShareDialog($entity, $entityId)
     {
         try {
             $entityCapitalize = ucfirst($entity);
@@ -51,9 +60,8 @@ class ShareDialogController extends Controller
                 }
                 //get invited users  
                 $users = InvitedUsersService::getInvitedUsers($model);
-                $userContacts = $userContactsInerface->getUserContacts();
                 Inertia::setRootView('share-dialog');
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'userContacts' => $userContacts]);
+                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
