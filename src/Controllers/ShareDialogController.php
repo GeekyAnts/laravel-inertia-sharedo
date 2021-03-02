@@ -23,10 +23,9 @@ class ShareDialogController extends Controller
     {
         if (!config('share-dialog.typehead'))
             return response()->json(['searchUsers' => []]);
-
         $className = config('share-dialog.typehead');
         $controller =  new $className;
-        $users = $controller->getUserContacts($query);
+        $users = json_decode($controller->getUserContacts($query));
         return response()->json(['searchUsers' => $users]);
     }
 
