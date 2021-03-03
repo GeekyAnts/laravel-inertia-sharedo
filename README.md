@@ -137,11 +137,8 @@ To share your entity with other users visit:
 
 For example, to open a share dialog for your project model with id 123, run the following:
 
-```jsx
-{
-    APP_URL;
-}
-/share-dialog/cejoprst / 123;
+```
+{APP_URL}/share-dialog/projects/123;
 ```
 
 Note: The entity_name should have the same name as that of the database migration corresponding to the model that you want to share.
