@@ -5,5 +5,5 @@ namespace Geekyants\ShareDialog\Interfaces;
 
 interface UserContactsInerface
 {
-    public function getUserContacts($query): string;
+    public function getUserContacts($query);
 }
