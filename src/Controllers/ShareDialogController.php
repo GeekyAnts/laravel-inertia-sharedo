@@ -19,6 +19,15 @@ use Geekyants\ShareDialog\Services\AssignAbilityService;
 class ShareDialogController extends Controller
 {
 
+    public function searchUsers($query)
+    {
+        if (!config('share-dialog.typehead'))
+            return response()->json(['searchUsers' => []]);
+        $className = config('share-dialog.typehead');
+        $controller =  new $className;
+        $users = json_decode($controller->getUserContacts($query));
+        return response()->json(['searchUsers' => $users]);
+    }
 
 
     public function showShareDialog($entity, $entityId)
@@ -50,7 +59,6 @@ class ShareDialogController extends Controller
                 }
                 //get invited users  
                 $users = InvitedUsersService::getInvitedUsers($model);
-
                 Inertia::setRootView('share-dialog');
                 return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users]);
             } else {
@@ -59,7 +67,6 @@ class ShareDialogController extends Controller
         } catch (\Exception $e) {
 
             return back()->withErrors($e->getMessage());
-
         }
     }
 
@@ -80,16 +87,13 @@ class ShareDialogController extends Controller
             //get emails from request
             $emails = $request->emails;
 
-           //assign abilities
-            $message=AssignAbilityService::assignAbilities($emails,$request->ability,$model,$modelClass,$entityClass);
+            //assign abilities
+            $message = AssignAbilityService::assignAbilities($emails, $request->ability, $model, $modelClass, $entityClass);
 
             return redirect()->route('share-dialog', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('success', $message);
-
-
         } catch (\Exception $e) {
 
             return back()->withErrors($e->getMessage());
-
         }
     }
 }
