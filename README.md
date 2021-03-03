@@ -1,6 +1,6 @@
 ### **Laravel Inertia ShareDialog**
 
-              Add a share functionality to your Laravel projects:
+                     Add a share functionality to your Laravel projects
 
 ![https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/share-dialog.gif](public/images/share-dialog.gif)
 
