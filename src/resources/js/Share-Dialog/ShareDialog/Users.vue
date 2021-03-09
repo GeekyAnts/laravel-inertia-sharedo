@@ -22,7 +22,7 @@
       </div>
       <div
         v-if="user.ability == 'Is Owner'"
-        class="pl-6 text-sm"
+        class="pl-4 text-sm"
         style="color: #4262ff"
       >
         {{ user.ability }}
