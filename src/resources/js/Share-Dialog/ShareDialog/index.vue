@@ -3,7 +3,7 @@
     <!-- <flashmessage></flashmessage> -->
 
     <!-- Invitation FORM -->
-    <div>
+    <div class="fixed top-0 pt-4 right-4 left-4 z-50 bg-white">
       <form
         @submit.prevent="addNewUser"
         @keypress.enter.prevent
