@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-24 z-40">
+  <div>
     <div
       v-for="(user, index) in users"
       :key="index"
