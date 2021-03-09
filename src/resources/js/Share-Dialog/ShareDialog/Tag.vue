@@ -189,6 +189,8 @@ export default {
   width: 8rem !important;
   position: relative !important;
   font-size: 14px !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 /deep/ .multiselect__select {
   display: none !important;
