@@ -29,7 +29,7 @@
             tabindex="0"
             @keyup.enter="addNewUser"
             :disabled="!showInvite"
-            :class="showInvite ? 'btn-invite' : 'bg-blue-200'"
+            :class="showInvite ? 'btn-invite' : 'bg-blue-200 cursor-default'"
             class="focus:outline-none mt-2 focus:ring focus:border-blue-300 rounded text-sm focus:outline-none text-white py-1 h-10 px-16"
           >
             Invite
