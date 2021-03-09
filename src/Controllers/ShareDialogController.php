@@ -1,5 +1,6 @@
 <?php
 
+
 namespace Geekyants\ShareDialog\Controllers;
 
 
@@ -16,11 +17,15 @@ use Geekyants\ShareDialog\Services\AssignAbilityService;
 
 
 
+
+
 class ShareDialogController extends Controller
 {
 
+
     public function searchUsers($query)
     {
+
         if (!config('share-dialog.typehead'))
             return response()->json(['searchUsers' => []]);
         $className = config('share-dialog.typehead');
@@ -29,9 +34,10 @@ class ShareDialogController extends Controller
         return response()->json(['searchUsers' => $users]);
     }
 
-
     public function showShareDialog($entity, $entityId)
     {
+
+
         try {
             $entityCapitalize = ucfirst($entity);
             $entityModel = substr($entityCapitalize, 0, -1);
@@ -43,24 +49,28 @@ class ShareDialogController extends Controller
                 $authUser = Auth::user();
                 //find model
                 $model = $modelClass::with('user')->findOrFail($entityId);
-
                 $model['entity_name'] = $entityModelSmall;
 
                 //if auth user does not own model
-                if ($model->user->id != $authUser->id && Bouncer::cannot('write', $model)) {
+                if ($model->user_id != $authUser->id && Bouncer::cannot('write', $model)) {
                     return back()->withErrors("You are not authorized!");
                 }
 
                 //else assign ability to auth user
-                if ($authUser->id == $model->user->id) {
+                if ($authUser->id == $model->user_id) {
                     Bouncer::allow($authUser)->toOwn($model);
                     Bouncer::allow($authUser)->to('write', $model);
                     Bouncer::allow($authUser)->to('read', $model);
                 }
+                $findUser = false;
+                if (config('share-dialog.typehead'))
+                    $findUser = true;
+
                 //get invited users  
                 $users = InvitedUsersService::getInvitedUsers($model);
+
                 Inertia::setRootView('share-dialog');
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users]);
+                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
