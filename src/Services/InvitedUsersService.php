@@ -4,7 +4,7 @@ namespace Geekyants\ShareDialog\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
-
+use stdClass;
 
 class InvitedUsersService
 {
@@ -19,6 +19,7 @@ class InvitedUsersService
                     ->where('abilities.entity_id', $model->id);
             })
             ->get();
+
         return self::getUsersInformation($users, $model);
     }
     public static function getUsersInformation($users, $model)
@@ -26,15 +27,26 @@ class InvitedUsersService
 
 
         //find user according to id and assign permission to user object
+
         $invitedUsers = [];
         $mapArray = array();
+        $userAbilities = array();
         foreach ($users as $index => $key) {
+
             if ($key->entity_id != $model->user->id) {
                 $key->name = ($key->name == "read") ? "Can View" : "Can Edit";
+                $abilityObject = new stdClass;
+                if ($key->name == "Can View") {
+                    $abilityObject->value = "read";
+                    $abilityObject->ability = "Can View";
+                } else {
+                    $abilityObject->value = "write";
+                    $abilityObject->ability = "Can Edit";
+                }
+                $userAbilities[$key->entity_id] = $abilityObject;
             } else {
                 $key->name = "Is Owner";
             }
-
             $mapArray[$key->entity_id] = $key->name;
             array_push($invitedUsers, $key->entity_id);
         }
@@ -42,6 +54,6 @@ class InvitedUsersService
         foreach ($users as $user) {
             $user->ability = $mapArray[$user->id];
         }
-        return $users;
+        return array($users, $userAbilities);
     }
 }

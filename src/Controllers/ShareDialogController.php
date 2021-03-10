@@ -5,7 +5,6 @@ namespace Geekyants\ShareDialog\Controllers;
 
 
 use Inertia\Inertia;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Bouncer;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +36,6 @@ class ShareDialogController extends Controller
     public function showShareDialog($entity, $entityId)
     {
 
-
         try {
             $entityCapitalize = ucfirst($entity);
             $entityModel = substr($entityCapitalize, 0, -1);
@@ -67,10 +65,10 @@ class ShareDialogController extends Controller
                     $findUser = true;
 
                 //get invited users  
-                $users = InvitedUsersService::getInvitedUsers($model);
-
+                list($users, $usersAbiltites) = InvitedUsersService::getInvitedUsers($model);
                 Inertia::setRootView('share-dialog');
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser]);
+
+                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser, 'usersAbilities' => $usersAbiltites]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
@@ -82,6 +80,8 @@ class ShareDialogController extends Controller
 
     public function assignAbility(Request $request)
     {
+
+
         try {
             $request->validate([
                 'emails' => 'required',
