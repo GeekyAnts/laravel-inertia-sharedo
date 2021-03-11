@@ -33,20 +33,20 @@ class InvitedUsersService
         $userAbilities = array();
         foreach ($users as $index => $key) {
 
-            if ($key->entity_id != $model->user->id) {
-                $key->name = ($key->name == "read") ? "Can View" : "Can Edit";
-                $abilityObject = new stdClass;
-                if ($key->name == "Can View") {
-                    $abilityObject->value = "read";
-                    $abilityObject->ability = "Can View";
-                } else {
-                    $abilityObject->value = "write";
-                    $abilityObject->ability = "Can Edit";
-                }
-                $userAbilities[$key->entity_id] = $abilityObject;
+
+            if ($key->entity_id == $model->user->id)
+                continue;
+
+            $key->name = ($key->name == "read") ? "Can View" : "Can Edit";
+            $abilityObject = new stdClass;
+            if ($key->name == "Can View") {
+                $abilityObject->value = "read";
+                $abilityObject->ability = "Can View";
             } else {
-                $key->name = "Is Owner";
+                $abilityObject->value = "write";
+                $abilityObject->ability = "Can Edit";
             }
+            $userAbilities[$key->entity_id] = $abilityObject;
             $mapArray[$key->entity_id] = $key->name;
             array_push($invitedUsers, $key->entity_id);
         }

@@ -67,8 +67,7 @@ class ShareDialogController extends Controller
                 //get invited users  
                 list($users, $usersAbiltites) = InvitedUsersService::getInvitedUsers($model);
                 Inertia::setRootView('share-dialog');
-
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser, 'usersAbilities' => $usersAbiltites]);
+                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser, 'usersAbilities' => $usersAbiltites, 'modelOwner' => $model->user]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
@@ -102,7 +101,6 @@ class ShareDialogController extends Controller
 
             return redirect()->route('share-dialog', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('success', $message);
         } catch (\Exception $e) {
-
             return back()->withErrors($e->getMessage());
         }
     }
