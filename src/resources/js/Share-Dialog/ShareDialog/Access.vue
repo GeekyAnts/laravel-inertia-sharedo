@@ -56,105 +56,53 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
-/deep/ ul > li:nth-child(3) span span {
-  color: red;
-}
-/deep/ .color-75 {
-  color: rgba(95, 92, 128, 1);
-}
-/deep/ .multiselect__option--highlight {
-  background: rgba(0, 0, 0, 0.04) !important;
-  color: #4262ff !important;
-}
-/deep/ .multiselect__option {
-  color: rgb(55, 52, 97);
-  line-height: 8px;
-  font-weight: 400;
-  font-size: 14px !important;
-  min-height: 0px !important;
-  padding: 20px 40px 20px 15px;
-}
-
-/deep/ .multiselect {
-  min-height: 0px !important;
-  position: none;
-  right: 12px !important;
-}
-/deep/ .multiselect__tag {
-  position: static;
-  font-size: 4rem !important;
-  border: none;
-  background: #fff;
+/deep/ .multiselect__tags {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  width: 118px;
+  background-color: #e3e3e3;
 }
 /deep/ .multiselect__single {
-  min-height: 0px !important;
-  line-height: unset !important;
+  background-color: #e3e3e3 !important;
   color: black;
-  font-size: 14px !important;
-  display: unset !important;
+  font-size: 14px;
+  font-weight: 500;
 }
-
 /deep/ .multiselect__select {
-  height: 17px !important;
-  line-height: unset !important;
-  transform: none;
-  right: -7px !important;
+  top: 4px;
 }
 /deep/ .multiselect__content-wrapper {
-  width: 150px !important;
-  margin-top: 40px;
+  margin-top: 10px;
   border-radius: 5px;
   max-height: 400px !important;
-  z-index: 999;
-  left: 5px;
   box-shadow: 0 8px 16px 0 rgba(5, 0, 56, 0.12);
 }
-
-/deep/ .multiselect__tags {
-  font-size: 12.5px;
-  border: none;
-  min-height: 0px !important;
-  line-height: unset !important;
-  padding: 0px 30px 0px 0px !important;
-  background: #fff;
-  float: right;
+/deep/ .multiselect__option {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 14px;
 }
-/deep/ .multiselect__tags:hover {
-  cursor: pointer;
+/deep/ .multiselect__option--highlight {
+  background: #318dd0 !important;
 }
 /deep/ .multiselect__option--selected {
-  font-weight: normal;
-  background-color: white;
+  font-weight: 500;
 }
 
-/deep/ .multiselect__select:hover ~ .multiselect__tags .multiselect__single {
-  background-color: inherit !important;
-  border-color: none;
-  background: none !important;
+/*icon */
+/deep/ .multiselect__select:before {
+  color: red;
 }
-
-/deep/ .multiselect__single {
-  font-size: 16px;
-  color: #4262ff;
+/deep/ .multiselect__select:active::before {
+  color: red;
 }
-
-/deep/ .multiselect__tags:hover .multiselect__single {
-  padding-left: 5px;
-  margin-bottom: 8px;
-  background-color: inherit !important;
-  border-color: none;
-  background: none !important;
-  border: 0 !important;
-  transition: none;
+/deep/ .multiselect__select {
+  transform: none !important;
 }
-/deep/ .multiselect__single:hover {
-  padding-left: 5px;
-  margin-bottom: 8px;
-  background-color: inherit !important;
-  border: none !important;
-  transition: none;
-}
-/deep/ .multiselect--active .multiselect__select {
-  transform: none;
+/deep/ .multiselect__select:before {
+  border-color: black transparent transparent transparent;
 }
 </style>

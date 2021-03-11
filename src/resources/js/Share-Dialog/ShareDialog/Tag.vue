@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <multiselect
       v-model="tagValue"
       tag-placeholder=""
@@ -22,7 +22,7 @@
       </template>
       <template slot="noOptions"><div class="hidden"></div></template>
       <template slot="beforeList">
-        <div v-if="!validEmail" class="text-sm text-right text-red-500 p-1">
+        <div v-if="!validEmail" class="text-sm text-left text-red-500 mt-3">
           Enter Valid Email
         </div>
       </template>
@@ -33,12 +33,15 @@
         >
           Enter Valid Email
         </div>
-        <div class="btn-create p-6" v-if="validEmail && props.option.label">
+        <div
+          class="btn-create p-6 mt-3"
+          v-if="validEmail && props.option.label"
+        >
           <div
             v-if="validEmail && props.option.label"
             class="flex items-center justify-center"
           >
-            Create "{{ props.option.label }}"
+            "{{ props.option.label }}"
           </div>
         </div>
         <div v-if="props.option.email" class="p-6">
@@ -135,90 +138,53 @@ export default {
 };
 </script>
 <style scoped>
-/deep/ .multiselect__tag {
-  background-color: rgb(240, 240, 243, 1);
-  color: #292555;
-  padding: 8px 40px 8px 10px;
-  border-radius: 16px;
-  font-size: 14px;
-}
-/deep/ .multiselect__tag:hover {
-  background-color: rgba(235, 235, 239, 1);
-  cursor: default;
-}
-/deep/ .multiselect__tag-icon {
-  cursor: pointer;
-  margin-left: 7px;
-  position: absolute;
-  right: 9px;
-  top: 2px;
-  bottom: 0;
-  font-weight: 300;
-  font-style: normal;
-  width: 22px;
-  text-align: center;
-  line-height: 22px;
-  transition: all 0.2s ease;
-  border-radius: 0px;
-}
-/deep/ .multiselect__tag-icon:after {
-  color: rgb(75, 75, 75) !important;
-  font-size: 24px;
-}
-/deep/ .multiselect__tags {
-  font-size: 12.5px;
-  border: none;
-  min-height: 0px !important;
-  line-height: unset !important;
-  background: #fff;
-  padding: 14px 0px 10px 10px;
-  border: 1px solid rgb(240, 240, 240);
-  vertical-align: middle !important;
-  overflow: hidden;
-}
-
-/deep/ .multiselect__spinner {
-  width: 21px !important;
-  top: 8px !important;
-  right: 1px !important;
-}
+/*basic tag */
 /deep/ .multiselect__input {
   border: none;
   color: #050038;
   padding: 5px !important;
   width: 8rem !important;
-  position: relative !important;
-  font-size: 14px !important;
   outline: none !important;
   box-shadow: none !important;
+  position: relative !important;
+  font-size: 14px !important;
+}
+/deep/ .multiselect__tag {
+  background-color: #e3e3e3;
+  color: #292555;
+  border-radius: 16px;
+  padding: 8px 40px 8px 10px;
+}
+
+/*icon*/
+
+/deep/ .multiselect__tag-icon {
+  right: 13px;
+  top: 9px;
+  width: 13px;
+  height: 13px;
+  line-height: 9px;
+  background: black;
+  border-radius: 50%;
+}
+
+/deep/ .multiselect__tag-icon:after {
+  color: white;
+  font-size: 10px;
 }
 /deep/ .multiselect__select {
   display: none !important;
 }
 
+/* options*/
 /deep/ .multiselect__option {
   padding: 0px !important;
   line-height: 0px !important;
   min-height: 0px !important;
   border: none;
 }
-/deep/ .multiselect__placeholder {
-  display: none !important;
-}
-/deep/ ::placeholder {
-  font-size: 16px !important;
-  color: rgb(94, 92, 127);
-}
-</style>
-
-
-
-<style scoped>
 /deep/ .multiselect__option {
   background-color: white;
-}
-/deep/ .valid-email {
-  background: #318dd0 !important;
 }
 /deep/ .multiselect__option--highlight:after {
   background: #318dd0 !important;
@@ -226,21 +192,22 @@ export default {
 /deep/ .multiselect__option--highlight {
   background-color: #318dd0 !important;
 }
-/deep/ .btn-create:hover {
-  background-color: #318dd0 !important;
-  color: white !important;
-}
-/deep/ .btn-create {
-  background-color: rgba(219, 234, 254, 1) !important;
-  color: rgb(75, 75, 75) !important;
-}
-
-/deep/ .multiselect__tag-icon:hover {
-  background-color: rgba(235, 235, 239, 1);
-}
 /deep/ .multiselect__content-wrapper {
   border-radius: 0.375rem;
   background: none;
   border: 0px !important;
 }
+
+/*placeholder*/
+/deep/ .multiselect__placeholder {
+  display: none !important;
+}
+
+.btn-create {
+  background-color: #318dd0;
+}
+.btn-create:hover {
+  background-color: #4682bf;
+}
 </style>
+

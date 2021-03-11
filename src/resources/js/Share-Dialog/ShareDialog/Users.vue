@@ -1,5 +1,6 @@
 <template>
   <div>
+    <owner :user="modelOwner"></owner>
     <div
       v-for="(user, index) in users"
       :key="index"
@@ -7,27 +8,20 @@
     >
       <div class="flex items-center">
         <div
-          :class="user.ability === 'Is Owner' ? 'bg-green-500' : 'bg-pink-500'"
+          :class="user.ability === 'Owner' ? 'bg-green-500' : 'bg-pink-500'"
           class="inline-block flex items-center justify-center text-white h-9 w-9 rounded-full ring-2 ring-white"
         >
           {{ user.name.charAt(0).toUpperCase() }}
         </div>
       </div>
 
-      <div class="flex flex-col w-1/4">
-        <div class="text-sm">{{ user.name }}</div>
+      <div class="flex flex-col w-1/2">
+        <div class="text-sm font-medium">{{ user.name }}</div>
         <div class="text-sm h-full color-75">
           {{ user.email }}
         </div>
       </div>
-      <div
-        v-if="user.ability == 'Is Owner'"
-        class="pl-4 text-sm flex items-center"
-        style="color: #4262ff"
-      >
-        {{ user.ability }}
-      </div>
-      <div v-else class="ml-1 w-28 flex items-center">
+      <div class="ml-1 w-28 flex items-center">
         <multiselect
           v-model="usersAbilties[user.id]"
           :id="user.email"
@@ -49,14 +43,17 @@
 </template>
 <script>
 import Multiselect from "vue-multiselect";
+import Owner from "./Owner";
 export default {
   components: {
     Multiselect,
+    owner: Owner,
   },
   props: {
     entity: {},
     users: Array,
     usersAbilties: {},
+    modelOwner: {},
   },
   data() {
     return {
@@ -105,12 +102,15 @@ export default {
 /deep/ ul > li:nth-child(3) span span {
   color: red;
 }
+/deep/ ul > li:nth-child(3) .multiselect__option--highlight span {
+  color: white !important;
+}
 /deep/ .color-75 {
   color: rgba(95, 92, 128, 1);
 }
 /deep/ .multiselect__option--highlight {
-  background: rgba(0, 0, 0, 0.04) !important;
-  color: #4262ff !important;
+  background: #318dd0 !important;
+  color: white !important;
 }
 
 /deep/ .multiselect__option {
@@ -119,7 +119,7 @@ export default {
   font-weight: 400;
   font-size: 14px !important;
   min-height: 0px !important;
-  padding: 20px 40px 20px 15px;
+  padding: 16px 40px 16px 15px;
 }
 
 /deep/ .multiselect {
@@ -144,11 +144,11 @@ export default {
 /deep/ .multiselect__select {
   height: 17px !important;
   line-height: unset !important;
-  right: -7px !important;
+  right: -4px !important;
 }
 /deep/ .multiselect__content-wrapper {
   width: 150px !important;
-  margin-top: 40px;
+  margin-top: 30px;
   border-radius: 5px;
   max-height: 400px !important;
   z-index: 999;
@@ -202,5 +202,8 @@ export default {
 }
 /deep/ .multiselect--active .multiselect__select {
   transform: none;
+}
+/deep/ .multiselect__select:before {
+  border-color: #4262ff transparent transparent transparent;
 }
 </style>
