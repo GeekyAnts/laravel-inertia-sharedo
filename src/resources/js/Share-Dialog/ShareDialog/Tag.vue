@@ -23,7 +23,7 @@
             <template slot="noOptions"><div class="hidden"></div></template>
             <template slot="beforeList">
                 <div
-                    v-if="!validEmail"
+                    v-if="!validEmail && this.tagOptions.length === 0"
                     class="text-sm text-left text-red-500 mt-3"
                 >
                     Enter Valid Email
