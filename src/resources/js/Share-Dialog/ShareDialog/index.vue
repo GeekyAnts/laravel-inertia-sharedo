@@ -59,7 +59,6 @@ import FlashMessage from "./FlashMessage";
 import Access from "./Access";
 import Tag from "./Tag";
 import Users from "./Users";
-import InviteLink from "../../../../packages/share-dialog/src/resources/js/Share-Dialog/ShareDialog/InviteLink.vue";
 export default {
   components: {
     Layout,
