@@ -5,15 +5,15 @@ namespace Geekyants\ShareDialog\Controllers;
 
 
 use Inertia\Inertia;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Bouncer;
 use Illuminate\Support\Facades\Auth;
+use Geekyants\ShareDialog\Models\ShareDialogInvitation;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
 use App\Http\Controllers\Controller;
 use Geekyants\ShareDialog\Services\InvitedUsersService;
 use Geekyants\ShareDialog\Services\AssignAbilityService;
-
-
 
 
 
@@ -101,7 +101,50 @@ class ShareDialogController extends Controller
 
             return redirect()->route('share-dialog', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('success', $message);
         } catch (\Exception $e) {
+
             return back()->withErrors($e->getMessage());
         }
+    }
+
+    public function inviteLink(Request $request)
+    {
+
+
+
+        $invitation = ShareDialogInvitation::where('invitation_token', $request->token)->first();
+
+        $entity_name = $invitation->entity_name;
+        $entity_id = $invitation->entity_id;
+        $ability  = $invitation->ability;
+
+
+        $entityClass = ucfirst($entity_name);
+        $modelClass = config('share-dialog.modelPath') . $entityClass;
+
+        $model = $modelClass::findOrFail($entity_id);
+        if (Auth::user()->id == $model->user_id) {
+            return;
+        }
+        $entityModelSmall = $request->entity_name . 's';
+        $emails = ["email" => Auth::user()->email];
+        $emails = array($emails);
+
+
+        $message = AssignAbilityService::assignAbilities($emails, $ability, $model, $modelClass, $entityClass);
+        session()->forget($request->token);
+        dd($message);
+
+        $invitation->delete();
+    }
+
+    public function copyInviteLink(Request $request)
+    {
+
+        $invitation = new ShareDialogInvitation($request->all());
+        $invitation->generateInvitationToken();
+        $invitation->save();
+        $url = "http://localhost/invite-user?token=" . $invitation['invitation_token'];
+
+        return response()->json(['url' => $url]);
     }
 }

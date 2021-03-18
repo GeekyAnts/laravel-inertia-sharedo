@@ -3,6 +3,7 @@
     <!-- <flashmessage></flashmessage> -->
 
     <!-- Invitation FORM -->
+
     <div>
       <form
         @submit.prevent="addNewUser"
@@ -37,7 +38,7 @@
     </div>
 
     <!-- INVITE LINK -->
-    <!-- <invitelink></invitelink> -->
+    <invitelink :entity="entity"></invitelink>
 
     <!-- INVITED USERS  -->
 
@@ -58,6 +59,7 @@ import FlashMessage from "./FlashMessage";
 import Access from "./Access";
 import Tag from "./Tag";
 import Users from "./Users";
+import InviteLink from "../../../../packages/share-dialog/src/resources/js/Share-Dialog/ShareDialog/InviteLink.vue";
 export default {
   components: {
     Layout,
@@ -67,6 +69,7 @@ export default {
     flashmessage: FlashMessage,
     tag: Tag,
     access: Access,
+    InviteLink,
   },
   data() {
     return {
