@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2 mt-14 flex space-x-4">
+  <div class="py-2 mt-5 flex space-x-4">
     <div class="flex items-center">
       <div
         class="inline-block flex bg-purple-500 items-center justify-center text-white h-9 w-9 rounded-full ring-2 ring-white"

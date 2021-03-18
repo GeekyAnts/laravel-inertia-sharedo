@@ -3,6 +3,7 @@
     <!-- <flashmessage></flashmessage> -->
 
     <!-- Invitation FORM -->
+
     <div>
       <form
         @submit.prevent="addNewUser"
@@ -37,7 +38,7 @@
     </div>
 
     <!-- INVITE LINK -->
-    <!-- <invitelink></invitelink> -->
+    <invitelink :entity="entity"></invitelink>
 
     <!-- INVITED USERS  -->
 
@@ -67,6 +68,7 @@ export default {
     flashmessage: FlashMessage,
     tag: Tag,
     access: Access,
+    InviteLink,
   },
   data() {
     return {
