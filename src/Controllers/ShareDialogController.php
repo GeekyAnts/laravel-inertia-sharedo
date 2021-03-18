@@ -131,9 +131,6 @@ class ShareDialogController extends Controller
 
 
         $message = AssignAbilityService::assignAbilities($emails, $ability, $model, $modelClass, $entityClass);
-        session()->forget($request->token);
-        dd($message);
-
         $invitation->delete();
     }
 
