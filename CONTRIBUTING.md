@@ -1,6 +1,6 @@
 # Contributing
 
-We want to make contributing to this project as easy and transparent as possible and we are grateful for, any contributions made by the community. By contributing to Share-Dialog, you agree to abide by the [code of conduct](https://github.com/s/laravel-inertia-share-dialog/blob/master/CODE_OF_CONDUCT.md).
+We want to make contributing to this project as easy and transparent as possible and we are grateful for, any contributions made by the community. By contributing to Share-Dialog, you agree to abide by the [code of conduct](https://github.com/GeekyAnts/laravel-inertia-share-dialog/blob/master/CONTRIBUTING.md).
 
 ## Reporting Issues and Asking Questions
 
