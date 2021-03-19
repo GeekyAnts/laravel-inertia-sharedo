@@ -8,13 +8,13 @@ Before opening an issue, please search the [issue tracker](https://github.com/Ge
 
 ## Bugs and Improvements
 
-We use the issue tracker to keep track of bugs and improvements to SyncState itself, its examples, and the documentation. We encourage you to open issues to discuss improvements, architecture, theory, internal implementation, etc. If a topic has been discussed before, we will ask you to join the previous discussion.
+We use the issue tracker to keep track of bugs and improvements to Share-Dialog itself, its repo, and the documentation. We encourage you to open issues to discuss improvements, architecture, theory, internal implementation, etc. If a topic has been discussed before, we will ask you to join the previous discussion.
 
 Please read and understand the contribution guide before creating an issue or pull request.
 
 ## Docs
 
-Improvements to the documentation are always welcome. You can find them in the on [demo]() repository. We use [Docusaurus](https://v2.docusaurus.io/) to build our documentation website. The website is published automatically whenever the `master` branch is updated.
+Improvements to the documentation are always welcome. You can find them in the on [Share-Dialog-Docs](https://github.com/GeekyAnts/laravel-share-dialog-docs) repository. We use [Docusaurus](https://v2.docusaurus.io/) to build our documentation website. The website is published automatically whenever the `master` branch is updated.
 
 ## Sending a Pull Request
 
