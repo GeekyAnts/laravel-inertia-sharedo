@@ -1,8 +1,8 @@
 <template>
-  <div class="py-2 mt-14 flex space-x-4">
+  <div class="py-2 mt-5 flex space-x-4">
     <div class="flex items-center">
       <div
-        class="inline-block flex bg-purple-500 items-center justify-center text-white h-9 w-9 rounded-full ring-2 ring-white"
+        class="inline-block flex icon-users items-center justify-center text-white h-9 w-9 rounded-full ring-2 ring-white"
       >
         {{ user.name.charAt(0).toUpperCase() }}
       </div>
@@ -13,7 +13,11 @@
         {{ user.email }}
       </div>
     </div>
-    <div class="pl-6 text-sm flex items-center font-semibold">Owner</div>
+    <div
+      class="text-sm flex text-gray-500 flex-1 justify-end items-center font-bold"
+    >
+      Owner
+    </div>
   </div>
 </template>
 <script>
@@ -23,5 +27,9 @@ export default {
   },
 };
 </script>
-
+<style>
+.icon-users {
+  background-color: #318dd0;
+}
+</style>
 
