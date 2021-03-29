@@ -2,7 +2,7 @@
 
               Add a share functionality to your Laravel projects:
 
-![https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/share-dialog.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/share-dialog.gif)
+![https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/share-dialog.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/sharedo.gif)
 
 ## **Introduction**
 
