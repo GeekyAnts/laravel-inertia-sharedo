@@ -23,7 +23,7 @@ class SharedoServiceProvider extends ServiceProvider
         UiCommand::macro('sharedo', function ($command) {
             SharedoPreset::install();
 
-            $command->info('Inertia.js scaffolding installed successfully.');
+            $command->info('Sharedo scaffolding installed successfully.');
             $command->info('Please run "composer update, npm install && npm run dev" to compile your fresh scaffolding.');
         });
 
