@@ -1,11 +1,5 @@
 <template>
   <div class="main bg-white py-8 px-8 w-screen md:w-full font-sans text-sm">
-    <!-- <flashmessage></flashmessage> -->
-
-    <!-- Invitation FORM -->
-
-    <!-- <tag ref="children" :findUser="findUser"></tag> -->
-
     <div>
       <form
         @submit.prevent="addNewUser"
@@ -165,7 +159,6 @@ export default {
     Layout,
     Multiselect,
     users: Users,
-    invitelink: inviteLink,
     flashmessage: FlashMessage,
     tag: Tag,
     access: Access,
@@ -231,7 +224,7 @@ export default {
       this.showInvite = false;
     },
     handleSubmit(formData) {
-      this.$inertia.post("/share-dialog", formData);
+      this.$inertia.post("/sharedo", formData);
     },
   },
   watch: {

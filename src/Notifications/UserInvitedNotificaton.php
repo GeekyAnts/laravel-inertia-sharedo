@@ -49,7 +49,7 @@ class UserInvitedNotificaton extends Notification
         $ability = $this->ability;
         $model = $this->model;
         $entity = $this->entity;
-        return (new MailMessage)->markdown('share-dialog::mail.invite-user', ['user' => $user, 'ability' => $ability, 'model' => $model, 'entity' => $entity]);
+        return (new MailMessage)->markdown('sharedo::mail.invite-user', ['user' => $user, 'ability' => $ability, 'model' => $model, 'entity' => $entity]);
     }
 
     /**
