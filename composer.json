@@ -1,11 +1,14 @@
 {
-    "name": "geekyants/share-dialog",
-    "description": "Adds Share Functionality in Laravel Projects",
+    "name": "geekyants/sharedo",
+    "description": "Share Popup in Laravel Apps",
     "keywords": [
-        "geekyants",
-        "sharedo"
+        "share",
+        "inertiajs",
+        "vue",
+        "laravel",
+        "geekyants"
     ],
-    "homepage": "https://github.com/geekyants/share-dialog",
+    "homepage": "https://github.com/GeekyAnts/laravel-inertia-sharedo",
     "license": "MIT",
     "type": "library",
     "authors": [
