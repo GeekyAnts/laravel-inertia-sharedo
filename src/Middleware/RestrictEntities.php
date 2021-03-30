@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekyants\ShareDialog\Middleware;
+namespace Geekyants\Sharedo\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

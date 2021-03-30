@@ -1,18 +1,18 @@
 <?php
 
-namespace Geekyants\ShareDialog\Tests;
+namespace Geekyants\Sharedo\Tests;
 
 use Orchestra\Testbench\TestCase;
-use Geekyants\ShareDialog\ShareDialogServiceProvider;
+use Geekyants\Sharedo\SharedoServiceProvider;
 
 class ExampleTest extends TestCase
 {
 
     protected function getPackageProviders($app)
     {
-        return [ShareDialogServiceProvider::class];
+        return [SharedoServiceProvider::class];
     }
-    
+
     /** @test */
     public function true_is_true()
     {

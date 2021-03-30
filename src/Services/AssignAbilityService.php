@@ -1,20 +1,22 @@
 <?php
 
-namespace Geekyants\ShareDialog\Services;
+namespace Geekyants\Sharedo\Services;
 
-use Geekyants\ShareDialog\Services\RemovePreviousAbiltiesService;
+use Geekyants\Sharedo\Services\RemovePreviousAbiltiesService;
 use App\Models\User;
 use Bouncer;
 use Illuminate\Support\Facades\Hash;
-use Geekyants\ShareDialog\Events\UserAbilityChanged;
+use Geekyants\Sharedo\Events\UserAbilityChanged;
 use Illuminate\Support\Facades\DB;
 
-class AssignAbilityService{
+class AssignAbilityService
+{
 
 
-    public static function assignAbilities($emails,$ability,$model,$modelClass,$entityClass){
-  
-        $message="";
+    public static function assignAbilities($emails, $ability, $model, $modelClass, $entityClass)
+    {
+
+        $message = "";
         $newUser = false;
         foreach ($emails as $email) {
             $user = User::where('email', $email['email'])->first();
@@ -37,16 +39,14 @@ class AssignAbilityService{
                 RemovePreviousAbiltiesService::removeAbilties($user, $model, $modelClass);
                 $message = "User Removed!";
             }
-           event(new UserAbilityChanged($user, $ability, $entityClass, $model));
-            
-          
+            event(new UserAbilityChanged($user, $ability, $entityClass, $model));
         }
         return $message;
-
     }
 
-    public static function createUser($email){
-    
+    public static function createUser($email)
+    {
+
         $user = User::create([
             'name' => "User",
             'email' => $email,
@@ -55,9 +55,4 @@ class AssignAbilityService{
 
         return $user;
     }
-
-
-
-
-
 }

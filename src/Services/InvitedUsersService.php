@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekyants\ShareDialog\Services;
+namespace Geekyants\Sharedo\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\User;

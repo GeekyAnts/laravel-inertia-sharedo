@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekyants\ShareDialog;
+namespace Geekyants\Sharedo;
 
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;

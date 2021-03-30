@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Geekyants\\ShareDialog\\": "src/"
+            "Geekyants\\Sharedo\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Geekyants\\ShareDialog\\Tests\\": "tests"
+            "Geekyants\\Sharedo\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -42,10 +42,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Geekyants\\ShareDialog\\ShareDialogServiceProvider"
+                "Geekyants\\Sharedo\\SharedoServiceProvider"
             ],
             "aliases": {
-                "ShareDialog": "Geekyants\\ShareDialog\\ShareDialogFacade"
+                "Sharedo": "Geekyants\\Sharedo\\SharedoFacade"
             }
         }
     }

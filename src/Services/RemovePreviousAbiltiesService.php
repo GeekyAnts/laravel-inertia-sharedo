@@ -2,7 +2,7 @@
 
 
 
-namespace Geekyants\ShareDialog\Services;
+namespace Geekyants\Sharedo\Services;
 
 use Bouncer;
 use Exception;

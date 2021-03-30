@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekyants\ShareDialog\Notifications;
+namespace Geekyants\Sharedo\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

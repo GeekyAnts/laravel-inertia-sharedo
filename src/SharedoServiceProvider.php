@@ -1,16 +1,16 @@
 <?php
 
-namespace Geekyants\ShareDialog;
+namespace Geekyants\Sharedo;
 
 
 
-use Geekyants\ShareDialog\Middleware\RestrictEntities;
+use Geekyants\Sharedo\Middleware\RestrictEntities;
 use Illuminate\Support\ServiceProvider;
-use Geekyants\ShareDialog\Middleware\ShareInertiaData;
+use Geekyants\Sharedo\Middleware\ShareInertiaData;
 use Laravel\Ui\UiCommand;
-use Geekyants\ShareDialog\ShareDialogPreset;
+use Geekyants\Sharedo\SharedoPreset;
 
-class ShareDialogServiceProvider extends ServiceProvider
+class SharedoServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -21,21 +21,21 @@ class ShareDialogServiceProvider extends ServiceProvider
 
 
         UiCommand::macro('share-dialog', function ($command) {
-          ShareDialogPreset::install();
+            SharedoPreset::install();
 
             $command->info('Inertia.js scaffolding installed successfully.');
             $command->info('Please run "composer update, npm install && npm run dev" to compile your fresh scaffolding.');
         });
 
-     
-  
+
+
         $this->bootInertia();
 
 
-       
+
 
         $this->loadViewsFrom(__DIR__ . '/./resources/views', 'share-dialog');
-        $this->loadMigrationsFrom(__DIR__.'/./migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/./migrations');
         $this->loadRoutesFrom(__DIR__ . '/./routes/web.php');
         app('router')->aliasMiddleware('restrict-entities', RestrictEntities::class);
 
@@ -53,7 +53,7 @@ class ShareDialogServiceProvider extends ServiceProvider
 
 
             // Registering package commands.
-         
+
         }
     }
 
@@ -73,14 +73,13 @@ class ShareDialogServiceProvider extends ServiceProvider
 
         // Register the main class to use with the facade
         $this->app->singleton('share-dialog', function () {
-            return new ShareDialog;
+            return new Sharedo;
         });
     }
     protected function bootInertia()
     {
-       
+
         $router = $this->app['router'];
         $router->pushMiddlewareToGroup('web', ShareInertiaData::class);
-    
     }
 }

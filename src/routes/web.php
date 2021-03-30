@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Geekyants\ShareDialog\Controllers\ShareDialogController;
+use Geekyants\Sharedo\Controllers\ShareDialogController;
 
 
 Route::group(['middleware' => config('share-dialog.middleware')], function () {

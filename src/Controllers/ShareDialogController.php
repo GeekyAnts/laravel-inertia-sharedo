@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Geekyants\ShareDialog\Controllers;
+namespace Geekyants\Sharedo\Controllers;
 
 
 use Inertia\Inertia;
@@ -10,8 +10,8 @@ use Bouncer;
 use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
 use App\Http\Controllers\Controller;
-use Geekyants\ShareDialog\Services\InvitedUsersService;
-use Geekyants\ShareDialog\Services\AssignAbilityService;
+use Geekyants\Sharedo\Services\InvitedUsersService;
+use Geekyants\Sharedo\Services\AssignAbilityService;
 
 
 
