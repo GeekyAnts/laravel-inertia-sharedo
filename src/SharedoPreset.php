@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Laravel\Ui\Presets\Preset;
 
-class ShareDoPreset extends Preset
+class SharedoPreset extends Preset
 {
     public static function install()
     {
