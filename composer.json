@@ -1,11 +1,11 @@
 {
-    "name": "geekyants/sharedo",
+    "name": "geekyants/share-dialog",
     "description": "Adds Share Functionality in Laravel Projects",
     "keywords": [
         "geekyants",
         "sharedo"
     ],
-    "homepage": "https://github.com/geekyants/sharedo",
+    "homepage": "https://github.com/geekyants/share-dialog",
     "license": "MIT",
     "type": "library",
     "authors": [
