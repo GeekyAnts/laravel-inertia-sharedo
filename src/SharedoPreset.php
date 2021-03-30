@@ -46,7 +46,7 @@ class SharedoPreset extends Preset
         copy(__DIR__ . '/resources/js/sharedo.js', resource_path('js/sharedo.js'));
         copy(__DIR__ . '/resources/views/sharedo.blade.php', resource_path('views/sharedo.blade.php'));
         tap(new Filesystem, function ($fs) {
-            $fs->copyDirectory(__DIR__ . '/resources/js/sharedo', resource_path('js/sharedo'));
+            $fs->copyDirectory(__DIR__ . '/resources/js/Sharedo', resource_path('js/Sharedo'));
         });
     }
 

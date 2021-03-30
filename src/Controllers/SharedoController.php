@@ -67,7 +67,7 @@ class SharedoController extends Controller
                 //get invited users  
                 list($users, $usersAbiltites) = InvitedUsersService::getInvitedUsers($model);
                 Inertia::setRootView('sharedo');
-                return Inertia::render('Sharedo/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser, 'usersAbilities' => $usersAbiltites, 'modelOwner' => $model->user]);
+                return Inertia::render('Pages/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser, 'usersAbilities' => $usersAbiltites, 'modelOwner' => $model->user]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
