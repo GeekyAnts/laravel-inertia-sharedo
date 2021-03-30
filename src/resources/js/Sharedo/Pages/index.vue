@@ -149,7 +149,6 @@
 <script>
 import Layout from "./Layout";
 import Multiselect from "vue-multiselect";
-import inviteLink from "./InviteLink";
 import FlashMessage from "./FlashMessage";
 import Access from "./Access";
 import Tag from "./Tag";
