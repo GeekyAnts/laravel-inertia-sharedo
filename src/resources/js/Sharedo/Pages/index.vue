@@ -1,11 +1,5 @@
 <template>
   <div class="main bg-white py-8 px-8 w-screen md:w-full font-sans text-sm">
-    <!-- <flashmessage></flashmessage> -->
-
-    <!-- Invitation FORM -->
-
-    <!-- <tag ref="children" :findUser="findUser"></tag> -->
-
     <div>
       <form
         @submit.prevent="addNewUser"
@@ -155,22 +149,18 @@
 <script>
 import Layout from "./Layout";
 import Multiselect from "vue-multiselect";
-import inviteLink from "./InviteLink";
 import FlashMessage from "./FlashMessage";
 import Access from "./Access";
 import Tag from "./Tag";
 import Users from "./Users";
-import InviteLink from "../../../../packages/share-dialog/src/resources/js/Share-Dialog/ShareDialog/InviteLink.vue";
 export default {
   components: {
     Layout,
     Multiselect,
     users: Users,
-    invitelink: inviteLink,
     flashmessage: FlashMessage,
     tag: Tag,
     access: Access,
-    InviteLink,
   },
   data() {
     return {
@@ -233,7 +223,7 @@ export default {
       this.showInvite = false;
     },
     handleSubmit(formData) {
-      this.$inertia.post("/share-dialog", formData);
+      this.$inertia.post("/sharedo", formData);
     },
   },
   watch: {

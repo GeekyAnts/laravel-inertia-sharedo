@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekyants\ShareDialog\Middleware;
+namespace Geekyants\Sharedo\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
@@ -17,9 +17,9 @@ class RestrictEntities
     public function handle(Request $request, Closure $next)
     {
 
-        if (!empty(config('share-dialog.restrict-entities'))) {
+        if (!empty(config('sharedo.restrict-entities'))) {
             $entity = $request->route()->parameters()['entity'];
-            if (!in_array($entity, config('share-dialog.restrict-entities'))) {
+            if (!in_array($entity, config('sharedo.restrict-entities'))) {
                 return back()->withErrors("Entity Restricted!");
             }
             return $next($request);

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Geekyants\ShareDialog\Controllers;
+namespace Geekyants\Sharedo\Controllers;
 
 
 use Inertia\Inertia;
@@ -10,37 +10,37 @@ use Bouncer;
 use Illuminate\Support\Facades\Auth;
 use Silber\Bouncer\Bouncer as BouncerBouncer;
 use App\Http\Controllers\Controller;
-use Geekyants\ShareDialog\Services\InvitedUsersService;
-use Geekyants\ShareDialog\Services\AssignAbilityService;
+use Geekyants\Sharedo\Services\InvitedUsersService;
+use Geekyants\Sharedo\Services\AssignAbilityService;
 
 
 
 
 
 
-class ShareDialogController extends Controller
+class SharedoController extends Controller
 {
 
 
     public function searchUsers($query)
     {
 
-        if (!config('share-dialog.typehead'))
+        if (!config('sharedo.typehead'))
             return response()->json(['searchUsers' => []]);
-        $className = config('share-dialog.typehead');
+        $className = config('sharedo.typehead');
         $controller =  new $className;
         $users = json_decode($controller->getUserContacts($query));
         return response()->json(['searchUsers' => $users]);
     }
 
-    public function showShareDialog($entity, $entityId)
+    public function showSharedo($entity, $entityId)
     {
 
         try {
             $entityCapitalize = ucfirst($entity);
             $entityModel = substr($entityCapitalize, 0, -1);
             $entityModelSmall = substr($entity, 0, -1);
-            $modelClass = config('share-dialog.modelPath') . $entityModel;
+            $modelClass = config('sharedo.modelPath') . $entityModel;
 
             if (class_exists($modelClass)) {
 
@@ -61,13 +61,13 @@ class ShareDialogController extends Controller
                     Bouncer::allow($authUser)->to('read', $model);
                 }
                 $findUser = false;
-                if (config('share-dialog.typehead'))
+                if (config('sharedo.typehead'))
                     $findUser = true;
 
                 //get invited users  
                 list($users, $usersAbiltites) = InvitedUsersService::getInvitedUsers($model);
-                Inertia::setRootView('share-dialog');
-                return Inertia::render('ShareDialog/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser, 'usersAbilities' => $usersAbiltites, 'modelOwner' => $model->user]);
+                Inertia::setRootView('sharedo');
+                return Inertia::render('Pages/index', ['entity' => $model, 'users' => $users, 'findUser' => $findUser, 'usersAbilities' => $usersAbiltites, 'modelOwner' => $model->user]);
             } else {
                 return back()->withErrors("Model does not exist");
             }
@@ -89,7 +89,7 @@ class ShareDialogController extends Controller
             ]);
 
             $entityClass = ucfirst($request->entity_name);
-            $modelClass = config('share-dialog.modelPath') . $entityClass;
+            $modelClass = config('sharedo.modelPath') . $entityClass;
             $model = $modelClass::findOrFail($request->entity_id);
             $entityModelSmall = $request->entity_name . 's';
 
@@ -99,7 +99,7 @@ class ShareDialogController extends Controller
             //assign abilities
             $message = AssignAbilityService::assignAbilities($emails, $request->ability, $model, $modelClass, $entityClass);
 
-            return redirect()->route('share-dialog', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('success', $message);
+            return redirect()->route('sharedo', ['entity' => $entityModelSmall, 'entityId' => $request->entity_id])->with('success', $message);
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage());
         }

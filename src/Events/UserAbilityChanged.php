@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekyants\ShareDialog\Events;
+namespace Geekyants\Sharedo\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;

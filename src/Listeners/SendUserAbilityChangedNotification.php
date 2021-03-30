@@ -1,10 +1,10 @@
 <?php
 
-namespace Geekyants\ShareDialog\Listeners;
+namespace Geekyants\Sharedo\Listeners;
 
-use Geekyants\ShareDialog\Events\UserAbilityChanged;
-use GeekyAnts\ShareDialog\Notifications\UserInvitedNotification;
-use Geekyants\ShareDialog\Notifications\UserInvitedNotificaton;
+use Geekyants\Sharedo\Events\UserAbilityChanged;
+use GeekyAnts\Sharedo\Notifications\UserInvitedNotification;
+use Geekyants\Sharedo\Notifications\UserInvitedNotificaton;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 

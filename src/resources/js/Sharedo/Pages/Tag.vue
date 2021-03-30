@@ -171,12 +171,10 @@ export default {
       if (!this.findUser) return;
       if (this.timeout) clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
-        axios
-          .get(`/share-dialog/searchUsers/${searchQuery}`)
-          .then((response) => {
-            this.isLoading = false;
-            this.tagOptions = response.data.searchUsers;
-          });
+        axios.get(`/sharedo/searchUsers/${searchQuery}`).then((response) => {
+          this.isLoading = false;
+          this.tagOptions = response.data.searchUsers;
+        });
       }, 300); // delay
     },
     addNewUser(e) {
@@ -194,7 +192,7 @@ export default {
       this.handleSubmit(formData);
     },
     handleSubmit(formData) {
-      this.$inertia.post("/share-dialog", formData);
+      this.$inertia.post("/sharedo", formData);
     },
     validateEmail(value) {
       let emailExists = false;

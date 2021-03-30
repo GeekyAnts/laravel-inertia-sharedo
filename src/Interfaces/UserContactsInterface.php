@@ -1,6 +1,6 @@
 <?php
 
-namespace Geekyants\ShareDialog\Interfaces;
+namespace Geekyants\Sharedo\Interfaces;
 
 
 interface UserContactsInerface

@@ -14,7 +14,7 @@ new Vue({
             props: {
                 initialPage: JSON.parse(el.dataset.page),
                 resolveComponent: (name) =>
-                    require(`./Share-Dialog/${name}`).default,
+                    require(`./Sharedo/${name}`).default,
             },
         }),
 }).$mount(el);

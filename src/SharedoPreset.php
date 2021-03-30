@@ -1,13 +1,13 @@
 <?php
 
-namespace Geekyants\ShareDialog;
+namespace Geekyants\Sharedo;
 
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Laravel\Ui\Presets\Preset;
 
-class ShareDialogPreset extends Preset
+class SharedoPreset extends Preset
 {
     public static function install()
     {
@@ -43,10 +43,10 @@ class ShareDialogPreset extends Preset
 
     protected static function scaffoldComponents()
     {
-        copy(__DIR__ . '/resources/js/share-dialog.js', resource_path('js/share-dialog.js'));
-        copy(__DIR__ . '/resources/views/share-dialog.blade.php', resource_path('views/share-dialog.blade.php'));
+        copy(__DIR__ . '/resources/js/sharedo.js', resource_path('js/sharedo.js'));
+        copy(__DIR__ . '/resources/views/sharedo.blade.php', resource_path('views/sharedo.blade.php'));
         tap(new Filesystem, function ($fs) {
-            $fs->copyDirectory(__DIR__ . '/resources/js/Share-Dialog', resource_path('js/Share-Dialog'));
+            $fs->copyDirectory(__DIR__ . '/resources/js/Sharedo', resource_path('js/Sharedo'));
         });
     }
 
