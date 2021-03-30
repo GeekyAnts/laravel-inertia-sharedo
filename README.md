@@ -1,8 +1,8 @@
 ### **Laravel Inertia Sharedo**
 
-              Add a share functionality to your Laravel projects:
+              Share Popup for Laravel Apps
 
-![https://github.com/GeekyAnts/laravel-inertia-sharedo/raw/master/public/images/sharedo.gif](https://github.com/GeekyAnts/laravel-inertia-sharedo/blob/fix/readme-gif/public/images/sharedo.gif)
+![https://github.com/GeekyAnts/laravel-inertia-sharedo/raw/master/public/images/sharedo.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/blob/fix/readme-gif/public/images/sharedo.gif)
 
 ## **Introduction**
 
@@ -95,7 +95,7 @@ php artisan vendor:publish --tag="bouncer.migrations"
     php artisan ui sharedo
     ```
 
-    A sharedo folder containing Vue.js components will be created in your resources directory. You can now easily customise your sharedo's Vuejs components 🚀
+    A Sharedo folder containing Vue.js components will be created in your resources directory. You can now easily customise your Sharedo's Vuejs components 🚀
 
 4. Execute this command to migrate Bouncer migrations and the new_users_share_dialog table:
 
@@ -137,18 +137,15 @@ To share your entity with other users visit:
 
 For example, to open a share dialog for your project model with id 123, run the following:
 
-```jsx
-{
-    APP_URL;
-}
-/sharedo/cejoprst / 123;
+```
+{APP_URL}/sharedo/projects/123;
 ```
 
 Note: The entity_name should have the same name as that of the database migration corresponding to the model that you want to share.
 
-**sharedo sends error messages back to your application in the error props.**
+**Sharedo sends error messages back to your application in the error props.**
 
-If you invite a user who is not present in your database, sharedo automatically creates it in your users table. Also, a new entry is inserted into the new_users_share_dialog table referencing the user's id as a foreign key and sets `has_ever_logged_in property` to false.
+If you invite a user who is not present in your database, sharedo automatically creates it in your users table. Also, a new entry is inserted into the new_users_sharedo table referencing the user's id as a foreign key and sets `has_ever_logged_in property` to false.
 
 This can be useful if you want to differentiate between users created by sharedo and users created by the normal sign-up flow.
 

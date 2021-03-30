@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewUsersSharedDoTable extends Migration
+class CreateNewUsersSharedoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNewUsersSharedDoTable extends Migration
      */
     public function up()
     {
-        Schema::create('new_users_shared_do', function (Blueprint $table) {
+        Schema::create('new_users_sharedo', function (Blueprint $table) {
             $table->id();
             $table->string('has_ever_logged_in');
             $table->unsignedBigInteger('user_id');
@@ -32,6 +32,6 @@ class CreateNewUsersSharedDoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('new_users_shared_do');
+        Schema::dropIfExists('new_users_sharedo');
     }
 }
