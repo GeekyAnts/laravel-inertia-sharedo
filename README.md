@@ -1,8 +1,8 @@
-### **Laravel Inertia Sharedo**
+### **Sharedo**
 
               Share Popup for Laravel Apps
 
-![https://github.com/GeekyAnts/laravel-inertia-sharedo/raw/master/public/images/sharedo.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/blob/fix/readme-gif/public/images/sharedo.gif)
+![https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/sharedo.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/blob/fix/readme-gif/public/images/sharedo.gif)
 
 ## **Introduction**
 
@@ -77,7 +77,7 @@ php artisan vendor:publish --tag="bouncer.migrations"
 
 ## **Installation**
 
-1. Install the sharedo package using composer:
+1. Install the Sharedo package using composer:
 
     ```jsx
     composer require  geekyants/sharedo
@@ -97,7 +97,7 @@ php artisan vendor:publish --tag="bouncer.migrations"
 
     A Sharedo folder containing Vue.js components will be created in your resources directory. You can now easily customise your Sharedo's Vuejs components 🚀
 
-4. Execute this command to migrate Bouncer migrations and the new_users_share_dialog table:
+4. Execute this command to migrate Bouncer migrations and the new_users_sharedo table:
 
     ```jsx
     php artisan migrate

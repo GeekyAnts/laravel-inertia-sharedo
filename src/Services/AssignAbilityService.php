@@ -22,7 +22,7 @@ class AssignAbilityService
             $user = User::where('email', $email['email'])->first();
             if (!$user) {
                 $user = self::createUser($email['email']);
-                DB::table('new_users_shared_dialog')->insert([
+                DB::table('new_users_sharedo')->insert([
                     'user_id' => $user->id,
                     'has_ever_logged_in' => "false"
                 ]);
