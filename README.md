@@ -79,8 +79,6 @@ Run this command to publish the Bouncer's migrations to your app's migrations di
 php artisan vendor:publish --tag="bouncer.migrations"
 ```
 
----
-
 ## 4) Installation
 
 1. Install the Sharedo package using composer as shown below:
