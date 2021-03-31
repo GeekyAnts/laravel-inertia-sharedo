@@ -4,23 +4,23 @@ Share Popup for Laravel Apps
 
 ![https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/sharedo.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/blob/fix/readme-gif/public/images/sharedo.gif)
 
-## **Introduction**
+## 1) Introduction
 
 **Sharedo** is a composer package that helps you add a share functionality to your Laravel apps.
 
 It helps you manage roles and permissions for an app using Eloquent models. You can assign read or write permissions to a user and remove the permissions as required.
 
-## **Motivation**
+## 2) Motivation
 
 It becomes very time-consuming to add a share functionality to Laravel projects and can hinder the development process.
 
 This package aims to solve this problem and enables you to share your project's entities with other users with minimal effort.
 
-## **Dependencies**
+## 3) Dependencies
 
 If you have [Tailwind](https://tailwindcss.com/) and [Bouncer](https://github.com/JosephSilber/bouncer) pre-installed, you can move on to the [Installation](###installation) section.
 
-### 1) **Tailwind**
+### **Tailwind Installation**
 
 Install Tailwind as shown below:
 
@@ -54,7 +54,7 @@ module.exports = {
 };
 ```
 
-### 2) **Bouncer**
+### **Bouncer Installation**
 
 Install Bouncer using composer:
 
@@ -81,7 +81,7 @@ php artisan vendor:publish --tag="bouncer.migrations"
 
 ---
 
-## **Installation**
+## 4) Installation
 
 1. Install the Sharedo package using composer as shown below:
 
@@ -131,7 +131,7 @@ php artisan vendor:publish --tag="bouncer.migrations"
     npm run dev
     ```
 
-## **Usage**
+## 5) Usage
 
 You must define a relation `user` on the entity model that you want to share. The relation should return the user of that entity.
 
@@ -157,7 +157,7 @@ This can help you differentiate between the users created by sharedo and users c
 
 > To restrict other users from accessing your entities, you have to explicitly use the [Bouncer methods here](https://github.com/JosephSilber/bouncer#cheat-sheet).
 
-## **Customisation**
+## 6) Customisation
 
 You can customise the functionality of Sharedo easily by making changes in the sharedo.php file present in your config folder.
 
@@ -257,23 +257,23 @@ You can customise the functionality of Sharedo easily by making changes in the s
     "typehead" => "App\Repository\SendUserContacts"
     ```
 
-## **Tech Stack**
+## 7) Tech Stack
 
 Laravel, Tailwind, Bouncer, Vuejs
 
-## **Contributors**
+## 8) Contributors
 
 -   Cyrus Passi ([@Cyrus2505](https://twitter.com/Cyrus2505?s=20))
 -   Ila Sahu ([@ilasahu94](https://twitter.com/ilasahu94?lang=en))
 -   Sanket Sahu ([@sanketsahu](https://twitter.com/sanketsahu))
 -   Gaurav Guha ([@greedy_reader](https://twitter.com/greedy_reader?lang=en))
 
-## **How to Contribute**
+## 9) How to Contribute
 
 Thank you for your interest in contributing to Sharedo! We are lucky to have you 🙂 Head over to [Contribution Guidelines](https://github.com/GeekyAnts/laravel-inertia-sharedo/blob/master/CONTRIBUTING.md) and learn how you can be a part of a wonderful, growing community.
 
 For major changes, please open an issue first to discuss changes and update tests as appropriate.
 
-## **License**
+## 10) License
 
 Licensed under the MIT License. Please see the [License File](https://github.com/GeekyAnts/laravel-inertia-sharedo/blob/master/LICENSE.md) for more information.
