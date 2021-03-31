@@ -34,7 +34,7 @@ Next, generate your tailwind.config.js file:
 npx tailwindcss init
 ```
 
-Add the following code to your tailwind.config.js file:
+In your tailwind.config file, add the following:
 
 ```jsx
 module.exports = {
@@ -56,7 +56,7 @@ module.exports = {
 
 ### **Bouncer Installation**
 
-Install Bouncer using composer:
+Install Bouncer with composer:
 
 ```jsx
 composer require silber/bouncer v1.0.0-rc.10
@@ -73,7 +73,7 @@ class User extends Model
 }
 ```
 
-Run this command to publish the Bouncer's migrations to your app's migrations directory:
+Publish Bouncer's migrations to your app's migrations directory by running the following command:
 
 ```jsx
 php artisan vendor:publish --tag="bouncer.migrations"
