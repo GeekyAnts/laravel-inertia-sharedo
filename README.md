@@ -131,7 +131,7 @@ php artisan vendor:publish --tag="bouncer.migrations"
 
 ## 5) Usage
 
-You must define a relation `user` on the entity model that you want to share. The relation should return the user of that entity.
+You must define a relation **user** on the entity model that you want to share. The relation should return the user of that entity.
 
 To share your entity with other users visit:
 
@@ -149,7 +149,7 @@ For example, if you want to open the sharedo for a project model with id 123, th
 
 > Note: Sharedo sends error messages back to your application in the error props.
 
-If you invite a user who is not present in your database, Sharedo automatically creates it in your users table. Also, a new entry is inserted into the `new_users_sharedo` table referencing the user's id as a foreign key and `has_ever_logged_in` property is set to false.
+If you invite a user who is not present in your database, Sharedo automatically creates it in your users table. Also, a new entry is inserted into the **new_users_sharedo** table referencing the user's id as a foreign key and **has_ever_logged_in** property is set to false.
 
 This can help you differentiate between the users created by sharedo and users created by the usual sign-up flow.
 
@@ -159,49 +159,49 @@ This can help you differentiate between the users created by sharedo and users c
 
 You can customise the functionality of Sharedo easily by making changes in the sharedo.php file present in your config folder.
 
-1.  If your model files are not present in `App\Models\\`, you can set the **modelPath** to the path of that folder:
+1.  If your model files are not present in **App\Models\\\\**, you can set the **modelPath** to the path of that folder:
 
     ```jsx
     "modelPath" => "App\Models\\"
     ```
 
-2.  If you want to add your own custom middleware to the sharedo, append it to the middleware array. For example, if you want to add a `admin` middleware, your middleware array will look like this:
+2.  If you want to add your own custom middleware to the sharedo, append it to the middleware array. For example, if you want to add a **admin** middleware, your middleware array will look like this:
 
     ```jsx
     "middleware" => ['web', 'auth','admin']
     ```
 
-3.  If you want only certain entities to be shareable, you can add them to the **restrict-entities** array. For example, if you want only the `files` entity to be shareable, you can do as follows:
+3.  If you want only certain entities to be shareable, you can add them to the **restrict-entities** array. For example, if you want only the **files** entity to be shareable, you can do as follows:
 
     ```jsx
     'restrict-entities' => ['files'],
     ```
 
 4.  You can also send email notifications to the users when they are given access to an entity.  
-    Sharedo fires an `UserAbilityChanged` event when a user's access is changed and attaches the `SendUserAbilityChangedNotification` listener to it. If you want to send an email notification, make the following changes in EventServiceProvider:
+    Sharedo fires an **UserAbilityChanged** event when a user's access is changed and attaches the **SendUserAbilityChangedNotification** listener to it. If you want to send an email notification, make the following changes in EventServiceProvider:
 
-            ```jsx
-            use Geekyants\Sharedo\Events\UserAbilityChanged;
-            use Geekyants\Sharedo\Listeners\SendUserAbilityChangedNotification;
-            protected $listen = [
-              ...
-                   UserAbilityChanged::class => [
-                     SendUserAbilityChangedNotification::class,
-                 ]
+    ```jsx
+    use Geekyants\ShareDialog\Events\UserAbilityChanged;
+    use Geekyants\ShareDialog\Listeners\SendUserAbilityChangedNotification;
+    protected $listen = [
+     ...
+          UserAbilityChanged::class => [
+            SendUserAbilityChangedNotification::class,
+        ]
 
-             ];
-            ```
+    ];
+    ```
 
-           You can also modify the email template by publishing the Sharedo mail resources.
-           After running this command, the mail notification template will be located in the
+    You can also modify the email template by publishing the Sharedo mail resources.
+    After running this command, the mail notification template will be located in the
 
-            `resources/vendor/sharedo/mail` directory:
+    `resources/vendor/sharedo/mail` directory:
 
-            ```jsx
-            :php artisan vendor:publish  --tag="mail"
-            ```
+    ```jsx
+    :php artisan vendor:publish  --tag="mail"
+    ```
 
-            You can attach your own listeners to the event. For example, if you want to attach a `SendSlackNotification` listener to the event, you can add the following code:
+    You can attach your own listeners to the event. For example, if you want to attach a **SendSlackNotification** listener to the event, you can add the following code:
 
             ```jsx
             use Geekyants\Sharedo\Events\UserAbilityChanged;
