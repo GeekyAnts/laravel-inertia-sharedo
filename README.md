@@ -141,7 +141,7 @@ To share your entity with other users visit:
 {APP_URL}/sharedo/{entity_name}/{entity_id}
 ```
 
-For example, to open a share dialog for your project model with id 123, run the following:
+For example, if you want to open the sharedo for a project model with id 123, then visit
 
 ```
 {APP_URL}/sharedo/projects/123;
@@ -161,61 +161,63 @@ This can help you differentiate between the users created by sharedo and users c
 
 You can customise the functionality of Sharedo easily by making changes in the sharedo.php file present in your config folder.
 
-1. If your model files are present in some folder other than `"App\Models\\"`, you can set the `modelPath` to the path of that folder:
+1.  If your model files are not present in `App\Models\\`, you can set the **modelPath** to the path of that folder:
 
     ```jsx
     "modelPath" => "App\Models\\"
     ```
 
-2. If you want to add your own custom middleware to the sharedo, append it to the middleware array. For example, if you want to add a `"admin"` middleware, your middleware array will look like this:
+2.  If you want to add your own custom middleware to the sharedo, append it to the middleware array. For example, if you want to add a `admin` middleware, your middleware array will look like this:
 
     ```jsx
     "middleware" => ['web', 'auth','admin']
     ```
 
-3. If you want only certain entities to be shareable, you can add them to the `restrict-entities` array. For example, if your want only the `files` entity to be shareable, you can do as follows:
+3.  If you want only certain entities to be shareable, you can add them to the **restrict-entities** array. For example, if you want only the `files` entity to be shareable, you can do as follows:
 
     ```jsx
     'restrict-entities' => ['files'],
     ```
 
-4. You can also send email notifications to users when they are given access to an entity. Sharedo fires an `UserAbilityChanged` event when a user's access gets changed and attaches the `SendUserAbilityChangedNotification` listener to it. If you want to send an email notification, then add the following in EventServiceProvider:
+4.  You can also send email notifications to the users when they are given access to an entity.  
+    Sharedo fires an `UserAbilityChanged` event when a user's access is changed and attaches the `SendUserAbilityChangedNotification` listener to it. If you want to send an email notification, make the following changes in EventServiceProvider:
 
-    ```jsx
-    use Geekyants\Sharedo\Events\UserAbilityChanged;
-    use Geekyants\Sharedo\Listeners\SendUserAbilityChangedNotification;
-    protected $listen = [
-      ...
-           UserAbilityChanged::class => [
-             SendUserAbilityChangedNotification::class,
-         ]
+            ```jsx
+            use Geekyants\Sharedo\Events\UserAbilityChanged;
+            use Geekyants\Sharedo\Listeners\SendUserAbilityChangedNotification;
+            protected $listen = [
+              ...
+                   UserAbilityChanged::class => [
+                     SendUserAbilityChangedNotification::class,
+                 ]
 
-     ];
-    ```
+             ];
+            ```
 
-    Additionally, you can modify the email template by publishing the sharedo mail resources. After running this command, the mail notification template will be located in the
+           You can also modify the email template by publishing the Sharedo mail resources.
+           After running this command, the mail notification template will be located in the
 
-    `resources/vendor/sharedo/mail` directory:
+            `resources/vendor/sharedo/mail` directory:
 
-    ```jsx
-    :php artisan vendor:publish  --tag="mail"
-    ```
+            ```jsx
+            :php artisan vendor:publish  --tag="mail"
+            ```
 
-    You can attach your own listeners to the event. For example, if you want to attach a `SendSlackNotification` listener to the event, you can add the following code:
+            You can attach your own listeners to the event. For example, if you want to attach a `SendSlackNotification` listener to the event, you can add the following code:
 
-    ```jsx
-    use Geekyants\Sharedo\Events\UserAbilityChanged;
+            ```jsx
+            use Geekyants\Sharedo\Events\UserAbilityChanged;
 
-    ...
+            ...
 
-    protected $listen = [
-            UserAbilityChanged::class => [
-                SendSlackNotification::class,
-            ]
-        ];
-    ```
+            protected $listen = [
+                    UserAbilityChanged::class => [
+                        SendSlackNotification::class,
+                    ]
+                ];
+            ```
 
-5. If you want to provide an option to search users in the sharedo then you can create a class that implements **UserContactsInterface.php** from the package and define the **getUserContacts** function.
+5.  If you want to provide an option to search users in the sharedo then you can create a class that implements **UserContactsInterface.php** from the package and define the **getUserContacts** function.
 
     The return type of the **getUserContacts** function should be a string containing the JSON representation of an array of objects where each object denoting a user must have an **"email"** attribute.
 
@@ -255,18 +257,18 @@ You can customise the functionality of Sharedo easily by making changes in the s
     "typehead" => "App\Repository\SendUserContacts"
     ```
 
-## Tech Stack
+## **Tech Stack**
 
 Laravel, Tailwind, Bouncer, Vuejs
 
-## Contributors
+## **Contributors**
 
 -   Cyrus Passi ([@Cyrus2505](https://twitter.com/Cyrus2505?s=20))
 -   Ila Sahu ([@ilasahu94](https://twitter.com/ilasahu94?lang=en))
 -   Sanket Sahu ([@sanketsahu](https://twitter.com/sanketsahu))
 -   Gaurav Guha ([@greedy_reader](https://twitter.com/greedy_reader?lang=en))
 
-## How to Contribute
+## **How to Contribute**
 
 Thank you for your interest in contributing to Sharedo! We are lucky to have you 🙂 Head over to [Contribution Guidelines](https://github.com/GeekyAnts/laravel-inertia-sharedo/blob/master/CONTRIBUTING.md) and learn how you can be a part of a wonderful, growing community.
 
