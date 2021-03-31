@@ -101,7 +101,7 @@ php artisan vendor:publish --tag="bouncer.migrations"
 
     A **Sharedo** folder containing Vue.js components will be created in your resources directory. You can now easily customise your Sharedo's Vuejs components 🚀
 
-4. Now, run the migrations. After executing this command, Bouncer migrations and the `new_users_sharedo` table will be migrated:
+4. Now, run the migrations. After executing this command, Bouncer migrations and the **new_users_sharedo** table will be migrated:
 
     ```jsx
     php artisan migrate
