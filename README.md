@@ -181,8 +181,8 @@ You can customise the functionality of Sharedo easily by making changes in the s
     Sharedo fires an **UserAbilityChanged** event when a user's access is changed and attaches the **SendUserAbilityChangedNotification** listener to it. If you want to send an email notification, make the following changes in EventServiceProvider:
 
     ```jsx
-    use Geekyants\ShareDialog\Events\UserAbilityChanged;
-    use Geekyants\ShareDialog\Listeners\SendUserAbilityChangedNotification;
+    use Geekyants\Sharedo\Events\UserAbilityChanged;
+    use Geekyants\Sharedo\Listeners\SendUserAbilityChangedNotification;
     protected $listen = [
      ...
           UserAbilityChanged::class => [
