@@ -204,7 +204,7 @@ You can customise the functionality of Sharedo easily by making changes in the s
     You can attach your own listeners to the event. For example, if you want to attach a `SendSlackNotification` listener to the event, you can add the following code:
 
     ```php
-    use Geekyants\ShareDialog\Events\UserAbilityChanged;
+    use Geekyants\Sharedo\Events\UserAbilityChanged;
 
     ...
 
@@ -265,6 +265,8 @@ Laravel, Tailwind, Bouncer, Vuejs
 -   Ila Sahu ([@ilasahu94](https://twitter.com/ilasahu94?lang=en))
 -   Sanket Sahu ([@sanketsahu](https://twitter.com/sanketsahu))
 -   Gaurav Guha ([@greedy_reader](https://twitter.com/greedy_reader?lang=en))
+-   Aditya Jamuar ([@GeekJamuar](https://twitter.com/geekjamuar?lang=en))
+-   Madhav Bansal ([@madhavb23](https://twitter.com/madhavb23?lang=en))
 
 ## 9) How to Contribute
 
