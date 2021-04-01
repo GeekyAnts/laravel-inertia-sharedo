@@ -257,7 +257,7 @@ You can customise the functionality of Sharedo easily by making changes in the s
 
 ## 7) Tech Stack
 
-Laravel, Tailwind, Bouncer, Vuejs
+**Laravel**, **Tailwind**, **Bouncer**, **Vue.js**, **Inertia.js**
 
 ## 8) Contributors
 
