@@ -203,7 +203,7 @@ You can customise the functionality of Sharedo easily by making changes in the s
 
     You can attach your own listeners to the event. For example, if you want to attach a **SendSlackNotification** listener to the event, you can add the following code:
 
-            ```jsx
+            ```
             use Geekyants\Sharedo\Events\UserAbilityChanged;
 
             ...
