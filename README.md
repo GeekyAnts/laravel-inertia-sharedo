@@ -180,7 +180,7 @@ You can customise the functionality of Sharedo easily by making changes in the s
 4.  You can also send email notifications to the users when they are given access to an entity.  
     Sharedo fires an **UserAbilityChanged** event when a user's access is changed and attaches the **SendUserAbilityChangedNotification** listener to it. If you want to send an email notification, make the following changes in EventServiceProvider:
 
-    ```jsx
+    ```php
     use Geekyants\Sharedo\Events\UserAbilityChanged;
     use Geekyants\Sharedo\Listeners\SendUserAbilityChangedNotification;
     protected $listen = [
@@ -201,19 +201,19 @@ You can customise the functionality of Sharedo easily by making changes in the s
     :php artisan vendor:publish  --tag="mail"
     ```
 
-    You can attach your own listeners to the event. For example, if you want to attach a **SendSlackNotification** listener to the event, you can add the following code:
+    You can attach your own listeners to the event. For example, if you want to attach a `SendSlackNotification` listener to the event, you can add the following code:
 
-            ```
-            use Geekyants\Sharedo\Events\UserAbilityChanged;
+    ```php
+    use Geekyants\ShareDialog\Events\UserAbilityChanged;
 
-            ...
+    ...
 
-            protected $listen = [
-                    UserAbilityChanged::class => [
-                        SendSlackNotification::class,
-                    ]
-                ];
-            ```
+    protected $listen = [
+            UserAbilityChanged::class => [
+                SendSlackNotification::class,
+            ]
+        ];
+    ```
 
 5.  If you want to provide an option to search users in the sharedo then you can create a class that implements **UserContactsInterface.php** from the package and define the **getUserContacts** function.
 
