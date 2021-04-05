@@ -2,7 +2,7 @@
 
 Share Popup for Laravel Apps
 
-![https://github.com/GeekyAnts/laravel-inertia-share-dialog/raw/master/public/images/sharedo.gif](https://github.com/GeekyAnts/laravel-inertia-share-dialog/blob/fix/readme-gif/public/images/sharedo.gif)
+![Sharedo](./public/images/sharedosample.gif)
 
 ## 1) Introduction
 
