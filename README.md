@@ -2,7 +2,7 @@
 
 Share Popup for Laravel Apps
 
-![Sharedo](./public/images/sharedosample.gif)
+![Sharedo](./public/images/sharedo.gif)
 
 ## 1) Introduction
 
