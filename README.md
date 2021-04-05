@@ -34,7 +34,7 @@ Next, generate your tailwind.config.js file:
 npx tailwindcss init
 ```
 
-In your tailwind.config file, add the following:
+In your **tailwind.config.js** file, configure the **purge** option with the paths to all of your Blade templates and JavaScript components so Tailwind can tree-shake unused styles in production builds:
 
 ```jsx
 module.exports = {
@@ -52,6 +52,39 @@ module.exports = {
     },
     plugins: [],
 };
+```
+
+In your webpack.mix.js, add **tailwindcss** as a PostCSS plugin:
+
+```jsx
+mix.js("resources/js/app.js", "public/js").postCss(
+    "resources/css/app.css",
+    "public/css",
+    [require("tailwindcss")]
+);
+```
+
+Open the `./resources/css/app.css` file and add the following code, replacing the original file contents:
+
+```jsx
+/* ./resources/css/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+```
+
+Next, import your stylesheet in your main Blade layout (commonly `resources/views/layouts/app.blade.php` or similar) and add the responsive viewport meta tag if it's not already present:
+
+```jsx
+ <!doctype html>
+  <head>
+    <!-- ... --->
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  </head>
+  <!-- ... --->
 ```
 
 ### **Bouncer Installation**
