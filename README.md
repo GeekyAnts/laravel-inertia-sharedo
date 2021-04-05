@@ -16,7 +16,7 @@ This package aims to solve this problem by enabling you to share your project's 
 
 ## 3) Dependencies
 
-If you have [Tailwind](https://tailwindcss.com/) and [Bouncer](https://github.com/JosephSilber/bouncer) pre-installed, you can move on to the [Installation](###installation) section.
+If you have [Tailwind](https://tailwindcss.com/) and [Bouncer](https://github.com/JosephSilber/bouncer) pre-installed, you can move on to the [Installation](https://github.com/GeekyAnts/laravel-inertia-sharedo/tree/feat/update-tailwind#4-installation) section.
 
 ### **Tailwind Installation**
 
