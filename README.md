@@ -1,5 +1,9 @@
 # **Sharedo**
 
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/geekyants/sharedo.svg?style=flat-square)](https://packagist.org/packages/geekyants/sharedo)
+[![License](https://img.shields.io/packagist/l/geekyants/sharedo)](https://github.com/GeekyAnts/laravel-inertia-sharedo/blob/master/LICENSE.md)
+[![Total Downloads](https://img.shields.io/packagist/dt/geekyants/sharedo.svg?style=flat-square)](https://packagist.org/packages/geekyants/sharedo)
+
 Share Popup for Laravel Apps
 
 ![Sharedo](./public/images/sharedo.gif)
