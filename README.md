@@ -11,7 +11,7 @@ Share Popup for Laravel Apps
 ## 1) Introduction
 
 **Sharedo** is a composer package for Laravel projects which allows other users to read or write your project's entities.  
-It helps you manage roles and permissions in an app by using Eloquent Models. You can assign read or write permissions to a user and remove permissions as required.
+It provides you an interface to manage roles and permissions for Laravel apps with the help of Laravel Bouncer. You can assign read or write permissions to a user and remove permissions as required.
 
 ## 2) Motivation
 
